@@ -10,7 +10,7 @@ import org.openqa.selenium.WebDriver;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(Parameterized.class)
-public class LoginFromDifferentPlacesTest {
+public class GoToLoginFromDifferentPlacesTest {
     // поля класса
     private WebDriver driver;
     private LoginPage loginPage;
@@ -19,7 +19,7 @@ public class LoginFromDifferentPlacesTest {
     private final String browser;
     private final String testName;
     // конструктор
-    public LoginFromDifferentPlacesTest(String browser, String testName) {
+    public GoToLoginFromDifferentPlacesTest(String browser, String testName) {
         this.browser=browser;
         this.testName=testName;
     }
