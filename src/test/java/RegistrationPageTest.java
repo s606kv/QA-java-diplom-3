@@ -1,3 +1,5 @@
+import io.qameta.allure.Description;
+import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -42,6 +44,8 @@ public class RegistrationPageTest {
     }
 
     @Test
+    @DisplayName("Проверка возможности регистрации.")
+    @Description("Проверяется регистрация пользователя при вводе валидных данных в поля формы регистрации.")
     public void successRegistrationTest() {
         // объекты страницы логина
         LoginPage loginPage = new LoginPage(driver);
@@ -49,7 +53,7 @@ public class RegistrationPageTest {
         // задали данные пользователя с валидным паролем ГЗ 6 символов
         String name = faker.name().username();
         String email = faker.internet().emailAddress();
-        String password = "123456";
+        String password = faker.internet().password(6, 10);
 
         // выполнение
         registrationPage
@@ -64,9 +68,11 @@ public class RegistrationPageTest {
     }
 
     @Test
+    @DisplayName("Проверка длины пароля.")
+    @Description("Проверяется возможность ввода в поле регистрации пользователя пароля длиной меньше 6 символов.")
     public void incorrectPasswordTest() {
         // задали невалидный пароль ГЗ 5 символов
-        String password = "12345";
+        String password = faker.internet().password(5, 5);
 
         // заполнили только поле с паролем и кликнули на кнопку регистрации для снятия фокуса с поля
         registrationPage
