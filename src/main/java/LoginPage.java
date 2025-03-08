@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class LoginPage {
+
     ///  Локаторы
     private static final String LOGIN_PAGE_URL = "https://stellarburgers.nomoreparties.site/login";
     // поле "Email"
@@ -20,6 +21,8 @@ public class LoginPage {
     private static final By REGISTER_LINK = By.xpath(".//a[contains(@class, 'Auth_link__1fOlj') and contains (text(), 'Зарегистрироваться')]");
     // ссылка "Восстановить пароль"
     private static final By RESTORE_PASSWORD_LINK = By.xpath(".//a[contains(@class, 'Auth_link__1fOlj') and contains (text(), 'Восстановить пароль')]");
+    // предупреждение об ошибочном пароле
+    private static final By INCORRECT_PASSWORD_MESSAGE = By.xpath(".//p[contains(@class, 'input__error') and contains(text(), 'Некорректный пароль')]");
 
     /// Конструктор
     WebDriver driver;
@@ -77,6 +80,12 @@ public class LoginPage {
     @Step("Страница регистрации. Клик по кнопке \"Войти\".")
     public void clickEnterButton () {
         driver.findElement(ENTER_BUTTON).click();
+    }
+
+    @Step("Страница регистрации. Ожидание видимости сообщения о некорректном пароле.")
+    public void waitForIncorrectPasswordMessage () {
+        new WebDriverWait(driver, Duration.ofSeconds(3))
+                .until(ExpectedConditions.visibilityOfElementLocated(INCORRECT_PASSWORD_MESSAGE));
     }
 
 }

@@ -2,7 +2,7 @@ import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 
 public class FirstTest {
-    WebDriver driver = WebDriverFactory.setBrowser(WebDriverFactory.YANDEX);
+    WebDriver driver = WebDriverFactory.setBrowser(WebDriverFactory.CHROME);
 
     @Test
     public void simpleTest() {

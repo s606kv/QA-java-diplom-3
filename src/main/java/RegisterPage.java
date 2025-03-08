@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class RegisterPage {
+
     ///  Локаторы
     private static final String REGISTER_PAGE_URL = "https://stellarburgers.nomoreparties.site/register";
     // поле "Имя"
@@ -74,4 +75,5 @@ public class RegisterPage {
     public void clickEnterButton () {
         driver.findElement(ENTER_BUTTON).click();
     }
+
 }

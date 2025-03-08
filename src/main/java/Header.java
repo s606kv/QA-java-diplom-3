@@ -3,6 +3,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class Header {
+
     /// Локаторы
     // кнопка "Конструктор"
     private static final By HEADER_CONSTRUCTOR_BUTTON = By.xpath(".//p[contains (text(), 'Конструктор')]");

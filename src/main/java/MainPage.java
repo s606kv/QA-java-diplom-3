@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class MainPage {
+
     ///  Локаторы
     private static final String MAIN_PAGE_URL = "https://stellarburgers.nomoreparties.site/";
     // кнопка "Войти в аккаунт"
@@ -91,4 +92,5 @@ public class MainPage {
                 .until(ExpectedConditions.visibilityOfElementLocated(FILLING_FIRST_ELEMENT));
         return this;
     }
+
 }
