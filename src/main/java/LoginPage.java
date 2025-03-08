@@ -21,8 +21,6 @@ public class LoginPage {
     public static final By REGISTER_LINK = By.xpath(".//a[contains(@class, 'Auth_link__1fOlj') and contains (text(), 'Зарегистрироваться')]");
     // ссылка "Восстановить пароль"
     public static final By RESTORE_PASSWORD_LINK = By.xpath(".//a[contains(@class, 'Auth_link__1fOlj') and contains (text(), 'Восстановить пароль')]");
-    // предупреждение об ошибочном пароле
-    public static final By INCORRECT_PASSWORD_MESSAGE = By.xpath(".//p[contains(@class, 'input__error') and contains(text(), 'Некорректный пароль')]");
 
     /// Конструктор
     WebDriver driver;
@@ -77,15 +75,16 @@ public class LoginPage {
         return this;
     }
 
+    @Step("Страница регистрации. Заполнение всей формы входа.")
+    public LoginPage fillLoginForm (String email, String password) {
+        fillEmail(email);
+        fillPassword(password);
+        return this;
+    }
+
     @Step("Страница регистрации. Клик по кнопке \"Войти\".")
     public void clickEnterButton () {
         driver.findElement(ENTER_BUTTON).click();
-    }
-
-    @Step("Страница регистрации. Ожидание видимости сообщения о некорректном пароле.")
-    public void waitForIncorrectPasswordMessage () {
-        new WebDriverWait(driver, Duration.ofSeconds(3))
-                .until(ExpectedConditions.visibilityOfElementLocated(INCORRECT_PASSWORD_MESSAGE));
     }
 
 }

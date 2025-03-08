@@ -18,9 +18,13 @@ public class RegistrationPage {
     // поле "Пароль"
     public static final By PASSWORD_FIELD = By.xpath(".//form/fieldset//label[(text()='Пароль')]/following-sibling::input");
     // кнопка "Зарегистрироваться"
-    public static final By REGISTER_BUTTON = By.xpath(".//form/button[contains(@class, 'button_button__33qZ0') and contains(text(), 'Зарегистрироваться')]");
+    public static final By REGISTRATION_BUTTON = By.xpath(".//form/button[contains(@class, 'button_button__33qZ0') and contains(text(), 'Зарегистрироваться')]");
+    // заголовок "Войти"
+    public static final By ENTER_HEADER = By.xpath(".//div[@class='Auth_login__3hAey']/h2[(text()='Вход')]");
     // кнопка "Войти"
     public static final By ENTER_BUTTON = By.xpath(".//a[contains(@class, 'Auth_link__1fOlj') and contains(text(), 'Войти')]");
+    // предупреждение об ошибочном пароле
+    public static final By INCORRECT_PASSWORD_MESSAGE = By.xpath(".//p[contains(@class, 'input__error') and contains(text(), 'Некорректный пароль')]");
 
     /// Конструктор
     WebDriver driver;
@@ -47,19 +51,16 @@ public class RegistrationPage {
         driver.findElement(NAME_FIELD).sendKeys(name);
         return this;
     }
-
     @Step ("Страница регистрации. Заполнение поля \"Email\".")
     public RegistrationPage fillEmailField (String email) {
         driver.findElement(EMAIL_FIELD).sendKeys(email);
         return this;
     }
-
     @Step ("Страница регистрации. Заполнение поля \"Пароль\".")
     public RegistrationPage fillPasswordField (String password) {
         driver.findElement(PASSWORD_FIELD).sendKeys(password);
         return this;
     }
-
     @Step ("Страница регистрации. Заполнение всей формы регистрации.")
     public RegistrationPage fillRegistrationForm (String name, String email, String password) {
         fillNameField(name);
@@ -68,9 +69,31 @@ public class RegistrationPage {
         return this;
     }
 
+    @Step("Страница регистрации. Ожидание видимости сообщения о некорректном пароле.")
+    public void waitForIncorrectPasswordMessage () {
+        new WebDriverWait(driver, Duration.ofSeconds(3))
+                .until(ExpectedConditions.visibilityOfElementLocated(INCORRECT_PASSWORD_MESSAGE));
+    }
+
+    @Step ("Страница регистрации. Скролл до кнопки \"Зарегистрироваться\".")
+    public RegistrationPage scrollToRegistrationButton () {
+        Actions actions = new Actions(driver);
+        actions.moveToElement(driver.findElement(REGISTRATION_BUTTON));
+        actions.perform();
+        return this;
+    }
+
     @Step ("Страница регистрации. Клик по кнопке \"Зарегистрироваться\".")
-    public void clickRegisterButton () {
-        driver.findElement(REGISTER_BUTTON).click();
+    public RegistrationPage clickRegistrationButton() {
+        driver.findElement(REGISTRATION_BUTTON).click();
+        return this;
+    }
+
+    @Step("Страница регистрации. Ожидание видимости заголовка \"Вход\".")
+    public RegistrationPage waitForEnterHeader () {
+        new WebDriverWait(driver, Duration.ofSeconds(3))
+                .until(ExpectedConditions.visibilityOfElementLocated(ENTER_HEADER));
+        return this;
     }
 
     @Step ("Страница регистрации. Скролл до кнопки \"Войти\".")
