@@ -6,9 +6,9 @@ public class Header {
 
     /// Локаторы
     // кнопка "Конструктор"
-    private static final By HEADER_CONSTRUCTOR_BUTTON = By.xpath(".//p[contains (text(), 'Конструктор')]");
+    public static final By HEADER_CONSTRUCTOR_BUTTON = By.xpath(".//p[contains (text(), 'Конструктор')]");
     // кнопка с логотипом
-    private static final By HEADER_LOGO = By.className("AppHeader_header__logo__2D0X2");
+    public static final By HEADER_LOGO = By.className("AppHeader_header__logo__2D0X2");
     // кнопка "Личный кабинет"
     private static final By HEADER_PERSONAL_CABINET_BUTTON = By.xpath(".//p[contains (text(), 'Личный Кабинет')]");
 

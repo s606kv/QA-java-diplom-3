@@ -9,25 +9,25 @@ import java.time.Duration;
 public class MainPage {
 
     ///  Локаторы
-    private static final String MAIN_PAGE_URL = "https://stellarburgers.nomoreparties.site/";
+    public static final String MAIN_PAGE_URL = "https://stellarburgers.nomoreparties.site/";
     // кнопка "Войти в аккаунт"
-    private static final By ENTER_TO_ACCOUNT_BUTTON = By.xpath(".//button[contains(text(), 'Войти в аккаунт')]");
+    public static final By ENTER_TO_ACCOUNT_BUTTON = By.xpath(".//button[contains(text(), 'Войти в аккаунт')]");
     // конструктор для сборки бургера
-    private static final By BURGER_CONSTRUCTOR_SECTION = By.className("BurgerIngredients_ingredients__1N8v2");
+    public static final By BURGER_CONSTRUCTOR_SECTION = By.className("BurgerIngredients_ingredients__1N8v2");
     // раздел "Булки" в конструкторе
-    private static final By BUN_SECTION_SWITCHER = By.xpath(".//section[@class='BurgerIngredients_ingredients__1N8v2']//span[contains(text(), 'Булки')]");
+    public static final By BUN_SECTION_SWITCHER = By.xpath(".//section[@class='BurgerIngredients_ingredients__1N8v2']//span[contains(text(), 'Булки')]");
     // первый элемент в "Булках"
-    private static final By BUN_FIRST_ELEMENT = By.xpath(".//ul[@class='BurgerIngredients_ingredients__list__2A-mT'][1]/a[1]");
+    public static final By BUN_FIRST_ELEMENT = By.xpath(".//ul[@class='BurgerIngredients_ingredients__list__2A-mT'][1]/a[1]");
     // раздел "Соус" в конструкторе
-    private static final By SAUCE_SECTION_SWITCHER = By.xpath(".//section[@class='BurgerIngredients_ingredients__1N8v2']//span[contains(text(), 'Соусы')]");
+    public static final By SAUCE_SECTION_SWITCHER = By.xpath(".//section[@class='BurgerIngredients_ingredients__1N8v2']//span[contains(text(), 'Соусы')]");
     // первый элемент в "Соусах"
-    private static final By SAUCE_FIRST_ELEMENT = By.xpath(".//ul[@class='BurgerIngredients_ingredients__list__2A-mT'][2]/a[1]");
+    public static final By SAUCE_FIRST_ELEMENT = By.xpath(".//ul[@class='BurgerIngredients_ingredients__list__2A-mT'][2]/a[1]");
     // раздел "Начинки" в конструкторе
-    private static final By FILLING_SECTION_SWITCHER = By.xpath(".//section[@class='BurgerIngredients_ingredients__1N8v2']//span[contains(text(), 'Начинки')]");
+    public static final By FILLING_SECTION_SWITCHER = By.xpath(".//section[@class='BurgerIngredients_ingredients__1N8v2']//span[contains(text(), 'Начинки')]");
     // первый элемент в "Начинках"
-    private static final By FILLING_FIRST_ELEMENT = By.xpath(".//ul[@class='BurgerIngredients_ingredients__list__2A-mT'][3]/a[1]");
+    public static final By FILLING_FIRST_ELEMENT = By.xpath(".//ul[@class='BurgerIngredients_ingredients__list__2A-mT'][3]/a[1]");
     // таймер ожидания
-    private static final Duration TIMER_3_SEC = Duration.ofSeconds(3);
+    public static final Duration TIMER_3_SEC = Duration.ofSeconds(3);
 
     /// Конструктор
     WebDriver driver;

@@ -10,19 +10,19 @@ import java.time.Duration;
 public class LoginPage {
 
     ///  Локаторы
-    private static final String LOGIN_PAGE_URL = "https://stellarburgers.nomoreparties.site/login";
+    public static final String LOGIN_PAGE_URL = "https://stellarburgers.nomoreparties.site/login";
     // поле "Email"
-    private static final By EMAIL_FIELD = By.xpath(".//form/fieldset[1]/div/div/input");
+    public static final By EMAIL_FIELD = By.xpath(".//form/fieldset[1]/div/div/input");
     // поле "Пароль"
-    private static final By PASSWORD_FIELD = By.xpath(".//form/fieldset[2]/div/div/input");
+    public static final By PASSWORD_FIELD = By.xpath(".//form/fieldset[2]/div/div/input");
     // кнопка входа
-    private static final By ENTER_BUTTON = By.xpath(".//form/button[contains(text(), 'Войти')]");
+    public static final By ENTER_BUTTON = By.xpath(".//form/button[contains(text(), 'Войти')]");
     // ссылка "Зарегистрироваться"
-    private static final By REGISTER_LINK = By.xpath(".//a[contains(@class, 'Auth_link__1fOlj') and contains (text(), 'Зарегистрироваться')]");
+    public static final By REGISTER_LINK = By.xpath(".//a[contains(@class, 'Auth_link__1fOlj') and contains (text(), 'Зарегистрироваться')]");
     // ссылка "Восстановить пароль"
-    private static final By RESTORE_PASSWORD_LINK = By.xpath(".//a[contains(@class, 'Auth_link__1fOlj') and contains (text(), 'Восстановить пароль')]");
+    public static final By RESTORE_PASSWORD_LINK = By.xpath(".//a[contains(@class, 'Auth_link__1fOlj') and contains (text(), 'Восстановить пароль')]");
     // предупреждение об ошибочном пароле
-    private static final By INCORRECT_PASSWORD_MESSAGE = By.xpath(".//p[contains(@class, 'input__error') and contains(text(), 'Некорректный пароль')]");
+    public static final By INCORRECT_PASSWORD_MESSAGE = By.xpath(".//p[contains(@class, 'input__error') and contains(text(), 'Некорректный пароль')]");
 
     /// Конструктор
     WebDriver driver;
