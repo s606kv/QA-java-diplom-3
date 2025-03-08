@@ -3,9 +3,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 public class WebDriverFactory {
-    public static final String CHROME_BROWSER = "Chrome";
-    public static final String YANDEX_BROWSER = "Yandex";
-    public static final String FIREFOX = "Firefox";
+    public static final String CHROME = "Chrome";
+    public static final String YANDEX = "Yandex";
 
     public static WebDriver setBrowser (String browserName) {
         // настройка я.браузера
@@ -13,12 +12,12 @@ public class WebDriverFactory {
         ChromeOptions options = new ChromeOptions();
         options.setBinary("C:/Users/SKV/AppData/Local/Yandex/YandexBrowser/Application/browser.exe");
 
-        if (browserName.equals("Chrome")) {
+        if (browserName.equals(CHROME)) {
             return new ChromeDriver();
-        } else if (browserName.equals("Yandex")) {
+        } else if (browserName.equals(YANDEX)) {
             return new ChromeDriver(options);
         } else {
-            throw new RuntimeException("Не удалось определить браузер.");
+            throw new RuntimeException("Не удалось определить драйвер для указанного браузера.");
         }
     }
 }
