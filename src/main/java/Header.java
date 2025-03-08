@@ -1,3 +1,4 @@
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -16,17 +17,19 @@ public class Header {
         this.driver=driver;
     }
 
-    /// Методы
-    // клик по кнопке "Конструктор"
-    public void constructorButtonClick () {
+    /// Шаги
+    @Step("Хэдер сервиса. Клик по кнопке \"Конструктор\".")
+    public void clickConstructorButton () {
         driver.findElement(HEADER_CONSTRUCTOR_BUTTON).click();
     }
-    // клик по логотипу
-    public void logoClick () {
+
+    @Step("Хэдер сервиса. Клик по логотипу сервиса.")
+    public void clickLogo () {
         driver.findElement(HEADER_LOGO).click();
     }
-    // клик по кнопке "Личный кабинет"
-    public void personalCabinetButtonClick () {
+
+    @Step("Хэдер сервиса. Клик по кнопке \"Личный кабинет\".")
+    public void clickPersonalCabinetButton () {
         driver.findElement(HEADER_PERSONAL_CABINET_BUTTON).click();
     }
 

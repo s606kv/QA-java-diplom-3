@@ -1,3 +1,4 @@
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -11,7 +12,7 @@ public class MainPage {
     // кнопка "Войти в аккаунт"
     private static final By ENTER_TO_ACCOUNT_BUTTON = By.xpath(".//button[contains(text(), 'Войти в аккаунт')]");
     // конструктор для сборки бургера
-    private static final By BURGER_CONSTRUCTOR_SECTION = By.name("BurgerIngredients_ingredients__1N8v2");
+    private static final By BURGER_CONSTRUCTOR_SECTION = By.className("BurgerIngredients_ingredients__1N8v2");
     // раздел "Булки" в конструкторе
     private static final By BUN_SECTION_SWITCHER = By.xpath(".//section[@class='BurgerIngredients_ingredients__1N8v2']//span[contains(text(), 'Булки')]");
     // первый элемент в "Булках"
@@ -33,63 +34,61 @@ public class MainPage {
         this.driver=driver;
     }
 
-    /// Методы
-    // открытие страницы
-    public MainPage openPage () {
+    /// Шаги
+    @Step("Главная страница. Открытие страницы.")
+    public MainPage openMainPage () {
         driver.get(MAIN_PAGE_URL);
         return this;
     }
-    // клик по кнопке "Войти в аккаунт"
-    public void enterToAccountButtonClick () {
+
+    @Step("Главная страница. Клик по кнопке \"Войти в аккаунт\".")
+    public void clickEnterToAccountButton () {
         driver.findElement(ENTER_TO_ACCOUNT_BUTTON).click();
     }
-    // ожидание появления секции с конструктором бургера
+
+    @Step("Главная страница. Ожидание появления секции с конструктором бургера.")
     public MainPage waitForBurgerConstructorIsVisible () {
         new WebDriverWait(driver, TIMER_3_SEC)
                 .until(ExpectedConditions.visibilityOfElementLocated(BURGER_CONSTRUCTOR_SECTION));
         return this;
     }
-    // клик по кнопке переключения раздела с булками
-    public MainPage bunSectionSwitcherClick () {
+
+    @Step("Главная страница. Клик по кнопке переключения раздела \"Булки\".")
+    public MainPage clickBunSectionSwitcher () {
         driver.findElement(BUN_SECTION_SWITCHER);
         return this;
     }
-    // ожидание видимости первого элемента секции "Булки"
+
+    @Step("Главная страница. Ожидание видимости первого элемента секции \"Булки\".")
     public MainPage waitForFirstBunIsVisible () {
         new WebDriverWait(driver, TIMER_3_SEC)
                 .until(ExpectedConditions.visibilityOfElementLocated(BUN_FIRST_ELEMENT));
         return this;
     }
-    // клик по кнопке переключения раздела с соусами
-    public MainPage sauceSectionSwitcherClick () {
+
+    @Step("Главная страница. Клик по кнопке переключения раздела \"Соусы\".")
+    public MainPage clickSauceSectionSwitcher () {
         driver.findElement(SAUCE_SECTION_SWITCHER);
         return this;
     }
-    // ожидание видимости первого элемента секции "Соусы"
+
+    @Step("Главная страница. Ожидание видимости первого элемента секции \"Соусы\".")
     public MainPage waitForFirstSauceIsVisible () {
         new WebDriverWait(driver, TIMER_3_SEC)
                 .until(ExpectedConditions.visibilityOfElementLocated(SAUCE_FIRST_ELEMENT));
         return this;
     }
-    // клик по кнопке переключения раздела с соусами
-    public MainPage fillingSectionSwitcherClick () {
+
+    @Step("Главная страница. Клик по кнопке переключения раздела \"Начинки\".")
+    public MainPage clickFillingSectionSwitcher () {
         driver.findElement(FILLING_SECTION_SWITCHER);
         return this;
     }
-    // ожидание видимости первого элемента секции "Соусы"
+
+    @Step("Главная страница. Ожидание видимости первого элемента секции \"Начинки\".")
     public MainPage waitForFirstFillingIsVisible () {
         new WebDriverWait(driver, TIMER_3_SEC)
                 .until(ExpectedConditions.visibilityOfElementLocated(FILLING_FIRST_ELEMENT));
         return this;
     }
-
-
-
-
-
-
-
-
-
-
 }

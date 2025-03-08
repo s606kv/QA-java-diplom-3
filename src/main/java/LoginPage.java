@@ -1,0 +1,82 @@
+import io.qameta.allure.Step;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
+
+public class LoginPage {
+    ///  Локаторы
+    private static final String LOGIN_PAGE_URL = "https://stellarburgers.nomoreparties.site/login";
+    // поле "Email"
+    private static final By EMAIL_FIELD = By.xpath(".//form/fieldset[1]/div/div/input");
+    // поле "Пароль"
+    private static final By PASSWORD_FIELD = By.xpath(".//form/fieldset[2]/div/div/input");
+    // кнопка входа
+    private static final By ENTER_BUTTON = By.xpath(".//form/button[contains(text(), 'Войти')]");
+    // ссылка "Зарегистрироваться"
+    private static final By REGISTER_LINK = By.xpath(".//a[contains(@class, 'Auth_link__1fOlj') and contains (text(), 'Зарегистрироваться')]");
+    // ссылка "Восстановить пароль"
+    private static final By RESTORE_PASSWORD_LINK = By.xpath(".//a[contains(@class, 'Auth_link__1fOlj') and contains (text(), 'Восстановить пароль')]");
+
+    /// Конструктор
+    WebDriver driver;
+    public LoginPage (WebDriver driver) {
+        this.driver=driver;
+    }
+
+    /// Шаги
+    @Step("Страница регистрации. Открытие страницы.")
+    public LoginPage openLoginPage () {
+        driver.get(LOGIN_PAGE_URL);
+        return this;
+    }
+
+    @Step("Страница регистрации. Скролл до ссылки \"Зарегистрироваться\".")
+    public LoginPage scrollToRegisterLink () {
+        Actions actions = new Actions(driver);
+        actions.moveToElement(driver.findElement(REGISTER_LINK));
+        actions.perform();
+        return this;
+    }
+
+    @Step("Страница регистрации. Скролл до ссылки \"Восстановить пароль\".")
+    public LoginPage scrollToRestorePasswordLink () {
+        Actions actions = new Actions(driver);
+        actions.moveToElement(driver.findElement(RESTORE_PASSWORD_LINK));
+        actions.perform();
+        return this;
+    }
+
+    @Step("Страница регистрации. Клик по ссылке \"Зарегистрироваться\".")
+    public void clickRegisterLink () {
+        driver.findElement(REGISTER_LINK).click();
+    }
+
+    @Step("Страница регистрации. Ожидание видимости поля ввода почты.")
+    public LoginPage waitForEmailFieldIsVisible () {
+        new WebDriverWait(driver, Duration.ofSeconds(3))
+                .until(ExpectedConditions.visibilityOfElementLocated(EMAIL_FIELD));
+        return this;
+    }
+
+    @Step("Страница регистрации. Заполнение поля \"Email\".")
+    public LoginPage fillEmail (String email) {
+        driver.findElement(EMAIL_FIELD).sendKeys(email);
+        return this;
+    }
+
+    @Step("Страница регистрации. Заполнение поля \"Пароль\".")
+    public LoginPage fillPassword (String password) {
+        driver.findElement(PASSWORD_FIELD).sendKeys(password);
+        return this;
+    }
+
+    @Step("Страница регистрации. Клик по кнопке \"Войти\".")
+    public void clickEnterButton () {
+        driver.findElement(ENTER_BUTTON).click();
+    }
+
+}

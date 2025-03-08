@@ -7,11 +7,11 @@ public class WebDriverFactory {
     public static final String YANDEX = "Yandex";
 
     public static WebDriver setBrowser (String browserName) {
-        // настройка я.браузера
+        ///  Настройка Я.Браузера
         System.setProperty("webdriver.chrome.driver", "C:/WebDriver/bin/yandexdriver.exe");
         ChromeOptions options = new ChromeOptions();
         options.setBinary("C:/Users/SKV/AppData/Local/Yandex/YandexBrowser/Application/browser.exe");
-
+        /// Блок условий
         if (browserName.equals(CHROME)) {
             return new ChromeDriver();
         } else if (browserName.equals(YANDEX)) {
