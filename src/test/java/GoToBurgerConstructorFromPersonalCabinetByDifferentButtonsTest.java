@@ -34,7 +34,7 @@ public class GoToBurgerConstructorFromPersonalCabinetByDifferentButtonsTest {
     }
 
     // параметры
-    @Parameterized.Parameters (name = "{1}")
+    @Parameterized.Parameters (name = "{2}")
     public static Object[][] setTestData () {
         return new Object[][] {
                 {WebDriverFactory.YANDEX, Header.HEADER_CONSTRUCTOR_BUTTON, "Проверка перехода через \"Конструктор\" в Яндекс Браузере"},

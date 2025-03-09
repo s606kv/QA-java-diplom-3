@@ -14,19 +14,17 @@ public class MainPage {
     // кнопка "Войти в аккаунт"
     public static final By ENTER_TO_ACCOUNT_BUTTON = By.xpath(".//button[contains(text(), 'Войти в аккаунт')]");
     // кнопка "Оформить заказ"
-    public static final By PLACE_AN_ORDER_BUTTON = By.xpath(".//button[contains(text(), 'Оформить заказ')]");
-    // конструктор для сборки бургера
     public static final By BURGER_CONSTRUCTOR_SECTION = By.className("BurgerIngredients_ingredients__1N8v2");
     // раздел "Булки" в конструкторе
-    public static final By BUN_SECTION_SWITCHER = By.xpath(".//section[@class='BurgerIngredients_ingredients__1N8v2']//span[contains(text(), 'Булки')]");
+    public static final By BUN_TAB = By.xpath(".//section[@class='BurgerIngredients_ingredients__1N8v2']//span[contains(text(), 'Булки')]");
     // первый элемент в "Булках"
     public static final By BUN_FIRST_ELEMENT = By.xpath(".//ul[@class='BurgerIngredients_ingredients__list__2A-mT'][1]/a[1]");
     // раздел "Соус" в конструкторе
-    public static final By SAUCE_SECTION_SWITCHER = By.xpath(".//section[@class='BurgerIngredients_ingredients__1N8v2']//span[contains(text(), 'Соусы')]");
+    public static final By SAUCE_TAB = By.xpath(".//section[@class='BurgerIngredients_ingredients__1N8v2']//span[contains(text(), 'Соусы')]");
     // первый элемент в "Соусах"
     public static final By SAUCE_FIRST_ELEMENT = By.xpath(".//ul[@class='BurgerIngredients_ingredients__list__2A-mT'][2]/a[1]");
     // раздел "Начинки" в конструкторе
-    public static final By FILLING_SECTION_SWITCHER = By.xpath(".//section[@class='BurgerIngredients_ingredients__1N8v2']//span[contains(text(), 'Начинки')]");
+    public static final By FILLING_TAB = By.xpath(".//section[@class='BurgerIngredients_ingredients__1N8v2']//span[contains(text(), 'Начинки')]");
     // первый элемент в "Начинках"
     public static final By FILLING_FIRST_ELEMENT = By.xpath(".//ul[@class='BurgerIngredients_ingredients__list__2A-mT'][3]/a[1]");
     // таймер ожидания
@@ -58,8 +56,8 @@ public class MainPage {
     }
 
     @Step("**Главная страница**. Клик по кнопке переключения раздела \"Булки\".")
-    public MainPage clickBunSectionSwitcher () {
-        driver.findElement(BUN_SECTION_SWITCHER);
+    public MainPage clickBunsTabSwitcher () {
+        driver.findElement(BUN_TAB);
         return this;
     }
 
@@ -71,8 +69,8 @@ public class MainPage {
     }
 
     @Step("**Главная страница**. Клик по кнопке переключения раздела \"Соусы\".")
-    public MainPage clickSauceSectionSwitcher () {
-        driver.findElement(SAUCE_SECTION_SWITCHER);
+    public MainPage clickSaucesTabSwitcher () {
+        driver.findElement(SAUCE_TAB);
         return this;
     }
 
@@ -84,8 +82,8 @@ public class MainPage {
     }
 
     @Step("**Главная страница**. Клик по кнопке переключения раздела \"Начинки\".")
-    public MainPage clickFillingSectionSwitcher () {
-        driver.findElement(FILLING_SECTION_SWITCHER);
+    public MainPage clickFillingsTabSwitcher () {
+        driver.findElement(FILLING_TAB);
         return this;
     }
 
