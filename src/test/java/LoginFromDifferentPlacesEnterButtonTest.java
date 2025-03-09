@@ -10,18 +10,36 @@ import org.openqa.selenium.WebDriver;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(Parameterized.class)
-public class GoToLoginFromDifferentPlacesTest {
+public class LoginFromDifferentPlacesEnterButtonTest {
     // поля класса
     private WebDriver driver;
     private LoginPage loginPage;
+    private MainPage mainPage;
+    private Header header;
+    private ProfilePage profilePage;
+    private String email = "ludgi@yandex.ru";
+    private String password = "123456";
 
     // поля параметризации
     private final String browser;
     private final String testName;
     // конструктор
-    public GoToLoginFromDifferentPlacesTest(String browser, String testName) {
+    public LoginFromDifferentPlacesEnterButtonTest(String browser, String testName) {
         this.browser=browser;
         this.testName=testName;
+    }
+
+    // метода входа в систему и перехода в личный профиль
+    private void loginAndGoToProfile (String email, String password) {
+        loginPage
+                .waitForEmailFieldIsVisible()
+                .fillLoginFormAndEnter(email, password);
+        mainPage
+                .waitForBurgerConstructorIsVisible();
+        header
+                .clickPersonalCabinetButton();
+        profilePage
+                .waitForExitButtonIsVisible();
     }
 
     @Parameterized.Parameters (name = "{1}")
@@ -37,40 +55,42 @@ public class GoToLoginFromDifferentPlacesTest {
         driver = WebDriverFactory.setBrowser(browser);
         driver.manage().window().maximize();
         loginPage = new LoginPage(driver);
+        mainPage = new MainPage(driver);
+        header = new Header(driver);
+        profilePage = new ProfilePage(driver);
     }
 
     @Test
     @DisplayName("Проверка перехода на страницу входа в систему по кнопке \"Войти в аккаунт\" с главной страницы.")
     @Description("Проверяется возможность перехода на страницу входа в систему по кнопке \"Войти в аккаунт\" с главной страницы.")
     public void checkEnterAccountButtonFromMainPage () {
-        MainPage mainPage = new MainPage(driver);
-
         // выполнение
         mainPage
                 .openMainPage()
                 .waitForBurgerConstructorIsVisible()
                 .clickEnterToAccountButton();
 
+        loginAndGoToProfile(email, password);
+
         // проверка
-        assertTrue(driver.findElement(LoginPage.EMAIL_FIELD).isDisplayed());
+        assertTrue(driver.findElement(ProfilePage.EXIT_BUTTON).isDisplayed());
     }
 
     @Test
     @DisplayName("Проверка перехода на страницу входа в систему по кнопке \"Личный кабинет\" с главной страницы.")
     @Description("Проверяется возможность перехода на страницу входа в систему по кнопке \"Личный кабинет\" с главной страницы.")
     public void checkEnterAccountFromPersonalCabinetButtonFromMainPage () {
-        MainPage mainPage = new MainPage(driver);
-
         // выполнение
-        Header header = new Header(driver);
         mainPage
                 .openMainPage()
                 .waitForBurgerConstructorIsVisible();
         header
                 .clickPersonalCabinetButton();
 
+        loginAndGoToProfile(email, password);
+
         // проверка
-        assertTrue(driver.findElement(LoginPage.EMAIL_FIELD).isDisplayed());
+        assertTrue(driver.findElement(ProfilePage.EXIT_BUTTON).isDisplayed());
     }
 
     @Test
@@ -86,8 +106,10 @@ public class GoToLoginFromDifferentPlacesTest {
                 .scrollToEnterButton()
                 .clickEnterButton();
 
+        loginAndGoToProfile(email, password);
+
         // проверка
-        assertTrue(driver.findElement(LoginPage.EMAIL_FIELD).isDisplayed());
+        assertTrue(driver.findElement(ProfilePage.EXIT_BUTTON).isDisplayed());
     }
 
     @Test
@@ -101,12 +123,18 @@ public class GoToLoginFromDifferentPlacesTest {
                 .openForgotPasswordPage()
                 .clickEnterButton();
 
+        loginAndGoToProfile(email, password);
+
         // проверка
-        assertTrue(driver.findElement(LoginPage.EMAIL_FIELD).isDisplayed());
+        assertTrue(driver.findElement(ProfilePage.EXIT_BUTTON).isDisplayed());
     }
 
     @After
-    public void closeBrowser () {
+    public void tearDown () {
+        // выход из профиля
+        profilePage.clickExitButton();
+        loginPage.waitForEmailFieldIsVisible();
+        // закрытие браузера
         driver.quit();
     }
 

@@ -12,6 +12,8 @@ public class MainPage {
     public static final String MAIN_PAGE_URL = "https://stellarburgers.nomoreparties.site/";
     // кнопка "Войти в аккаунт"
     public static final By ENTER_TO_ACCOUNT_BUTTON = By.xpath(".//button[contains(text(), 'Войти в аккаунт')]");
+    // кнопка "Оформить заказ"
+    public static final By PLACE_AN_ORDER_BUTTON = By.xpath(".//button[contains(text(), 'Оформить заказ')]");
     // конструктор для сборки бургера
     public static final By BURGER_CONSTRUCTOR_SECTION = By.className("BurgerIngredients_ingredients__1N8v2");
     // раздел "Булки" в конструкторе

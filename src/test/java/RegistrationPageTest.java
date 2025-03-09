@@ -60,8 +60,7 @@ public class RegistrationPageTest {
                 .openRegistrationPage()
                 .waitForNameFieldIsVisible()
                 .fillRegistrationForm(name, email, password)
-                .scrollToRegistrationButton()
-                .clickRegistrationButton().waitForEnterHeader();
+                .waitForEnterHeader();
 
         // проверка
         assertTrue(driver.findElement(LoginPage.ENTER_BUTTON).isDisplayed());

@@ -68,23 +68,24 @@ public class LoginPage {
         driver.findElement(EMAIL_FIELD).sendKeys(email);
         return this;
     }
-
     @Step("Страница регистрации. Заполнение поля \"Пароль\".")
     public LoginPage fillPassword (String password) {
         driver.findElement(PASSWORD_FIELD).sendKeys(password);
         return this;
     }
-
-    @Step("Страница регистрации. Заполнение всей формы входа.")
-    public LoginPage fillLoginForm (String email, String password) {
-        fillEmail(email);
-        fillPassword(password);
-        return this;
-    }
-
     @Step("Страница регистрации. Клик по кнопке \"Войти\".")
     public void clickEnterButton () {
         driver.findElement(ENTER_BUTTON).click();
     }
+
+    @Step("Страница регистрации. Заполнение всей формы входа и нажатие кнопки \"Войти\".")
+    public LoginPage fillLoginFormAndEnter (String email, String password) {
+        fillEmail(email);
+        fillPassword(password);
+        clickEnterButton();
+        return this;
+    }
+
+
 
 }

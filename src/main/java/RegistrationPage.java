@@ -61,20 +61,6 @@ public class RegistrationPage {
         driver.findElement(PASSWORD_FIELD).sendKeys(password);
         return this;
     }
-    @Step ("Страница регистрации. Заполнение всей формы регистрации.")
-    public RegistrationPage fillRegistrationForm (String name, String email, String password) {
-        fillNameField(name);
-        fillEmailField(email);
-        fillPasswordField(password);
-        return this;
-    }
-
-    @Step("Страница регистрации. Ожидание видимости сообщения о некорректном пароле.")
-    public void waitForIncorrectPasswordMessage () {
-        new WebDriverWait(driver, Duration.ofSeconds(3))
-                .until(ExpectedConditions.visibilityOfElementLocated(INCORRECT_PASSWORD_MESSAGE));
-    }
-
     @Step ("Страница регистрации. Скролл до кнопки \"Зарегистрироваться\".")
     public RegistrationPage scrollToRegistrationButton () {
         Actions actions = new Actions(driver);
@@ -82,11 +68,25 @@ public class RegistrationPage {
         actions.perform();
         return this;
     }
-
     @Step ("Страница регистрации. Клик по кнопке \"Зарегистрироваться\".")
     public RegistrationPage clickRegistrationButton() {
         driver.findElement(REGISTRATION_BUTTON).click();
         return this;
+    }
+    @Step ("Страница регистрации. Заполнение всей формы регистрации и нажатие кнопки \"Зарегистрироваться\".")
+    public RegistrationPage fillRegistrationForm (String name, String email, String password) {
+        fillNameField(name);
+        fillEmailField(email);
+        fillPasswordField(password);
+        scrollToRegistrationButton();
+        clickRegistrationButton();
+        return this;
+    }
+
+    @Step("Страница регистрации. Ожидание видимости сообщения о некорректном пароле.")
+    public void waitForIncorrectPasswordMessage () {
+        new WebDriverWait(driver, Duration.ofSeconds(3))
+                .until(ExpectedConditions.visibilityOfElementLocated(INCORRECT_PASSWORD_MESSAGE));
     }
 
     @Step("Страница регистрации. Ожидание видимости заголовка \"Вход\".")
