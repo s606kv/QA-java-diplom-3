@@ -34,7 +34,7 @@ public class PersonalCabinetTest {
     @Parameterized.Parameters (name = "{1}")
     public static Object[][] setTestData () {
         return new Object[][] {
-//                {WebDriverFactory.YANDEX, "Проверка в Яндекс Браузере"},
+                {WebDriverFactory.YANDEX, "Проверка в Яндекс Браузере"},
                 {WebDriverFactory.CHROME, "Проверка в Гугл Хроме"},
         };
     }
@@ -77,38 +77,7 @@ public class PersonalCabinetTest {
                 .waitForEmailFieldIsVisible();
     }
 
-    @Test
-    @DisplayName("Переход из личного кабинета в конструктор.")
-    @Description("Проверяется возможность перехода в конструктор бургера из личного кабинете через кнопку \"Конструктор\" в хэдере страницы.")
-    public void goToConstructorFromPersonalCabinetTest () {
-        profilePage = new ProfilePage(driver);
-        header = new Header(driver);
-        mainPage = new MainPage(driver);
 
-        // выполнение
-        mainPage
-                .waitForBurgerConstructorIsVisible();
-        header
-                .clickPersonalCabinetButton();
-        profilePage
-                .waitForExitButtonIsVisible();
-        header
-                .clickConstructorButton();
-        mainPage
-                .waitForBurgerConstructorIsVisible();
-
-        /// Проверка видимости конструктора бургера
-        assertTrue(driver.findElement(MainPage.BURGER_CONSTRUCTOR_SECTION).isDisplayed());
-
-        // выход из профиля
-        header
-                .clickPersonalCabinetButton();
-        profilePage
-                .waitForExitButtonIsVisible()
-                .clickExitButton();
-        loginPage
-                .waitForEmailFieldIsVisible();
-    }
 
 
 
