@@ -41,6 +41,7 @@ public class PersonalCabinetTest {
 
     @Before
     public void setUpAndLogin () {
+        // инициализация драйвера и объектов страниц
         driver = WebDriverFactory.setBrowser(browser);
         driver.manage().window().maximize();
         loginPage = new LoginPage(driver);
@@ -87,11 +88,6 @@ public class PersonalCabinetTest {
         /// Проверка видимости элемента после нажатия кнопки выхода
         assertTrue(driver.findElement(LoginPage.EMAIL_FIELD).isDisplayed());
     }
-
-
-
-
-
 
     @After
     public void tearDown () {
