@@ -38,57 +38,57 @@ public class MainPage {
     }
 
     /// Шаги
-    @Step("Главная страница. Открытие страницы.")
+    @Step("**Главная страница**. Открытие страницы.")
     public MainPage openMainPage () {
         driver.get(MAIN_PAGE_URL);
         return this;
     }
 
-    @Step("Главная страница. Клик по кнопке \"Войти в аккаунт\".")
+    @Step("**Главная страница**. Клик по кнопке \"Войти в аккаунт\".")
     public void clickEnterToAccountButton () {
         driver.findElement(ENTER_TO_ACCOUNT_BUTTON).click();
     }
 
-    @Step("Главная страница. Ожидание появления секции с конструктором бургера.")
+    @Step("**Главная страница**. Ожидание появления секции с конструктором бургера.")
     public MainPage waitForBurgerConstructorIsVisible () {
         new WebDriverWait(driver, TIMER_3_SEC)
                 .until(ExpectedConditions.visibilityOfElementLocated(BURGER_CONSTRUCTOR_SECTION));
         return this;
     }
 
-    @Step("Главная страница. Клик по кнопке переключения раздела \"Булки\".")
+    @Step("**Главная страница**. Клик по кнопке переключения раздела \"Булки\".")
     public MainPage clickBunSectionSwitcher () {
         driver.findElement(BUN_SECTION_SWITCHER);
         return this;
     }
 
-    @Step("Главная страница. Ожидание видимости первого элемента секции \"Булки\".")
+    @Step("**Главная страница**. Ожидание видимости первого элемента секции \"Булки\".")
     public MainPage waitForFirstBunIsVisible () {
         new WebDriverWait(driver, TIMER_3_SEC)
                 .until(ExpectedConditions.visibilityOfElementLocated(BUN_FIRST_ELEMENT));
         return this;
     }
 
-    @Step("Главная страница. Клик по кнопке переключения раздела \"Соусы\".")
+    @Step("**Главная страница**. Клик по кнопке переключения раздела \"Соусы\".")
     public MainPage clickSauceSectionSwitcher () {
         driver.findElement(SAUCE_SECTION_SWITCHER);
         return this;
     }
 
-    @Step("Главная страница. Ожидание видимости первого элемента секции \"Соусы\".")
+    @Step("**Главная страница**. Ожидание видимости первого элемента секции \"Соусы\".")
     public MainPage waitForFirstSauceIsVisible () {
         new WebDriverWait(driver, TIMER_3_SEC)
                 .until(ExpectedConditions.visibilityOfElementLocated(SAUCE_FIRST_ELEMENT));
         return this;
     }
 
-    @Step("Главная страница. Клик по кнопке переключения раздела \"Начинки\".")
+    @Step("**Главная страница**. Клик по кнопке переключения раздела \"Начинки\".")
     public MainPage clickFillingSectionSwitcher () {
         driver.findElement(FILLING_SECTION_SWITCHER);
         return this;
     }
 
-    @Step("Главная страница. Ожидание видимости первого элемента секции \"Начинки\".")
+    @Step("**Главная страница**. Ожидание видимости первого элемента секции \"Начинки\".")
     public MainPage waitForFirstFillingIsVisible () {
         new WebDriverWait(driver, TIMER_3_SEC)
                 .until(ExpectedConditions.visibilityOfElementLocated(FILLING_FIRST_ELEMENT));

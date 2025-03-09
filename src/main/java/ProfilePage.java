@@ -18,14 +18,14 @@ public class ProfilePage {
     }
 
     /// Шаги
-    @Step("Страница профиля. Ожидание появления кнопки \"Выход\".")
+    @Step("**Страница профиля**. Ожидание появления кнопки \"Выход\".")
     public ProfilePage waitForExitButtonIsVisible () {
         new WebDriverWait(driver, Duration.ofSeconds(3))
                 .until(ExpectedConditions.visibilityOfElementLocated(EXIT_BUTTON));
         return this;
     }
 
-    @Step("Страница профиля. Нажатие кнопки \"Выход\".")
+    @Step("**Страница профиля**. Нажатие кнопки \"Выход\".")
     public void clickExitButton () {
         driver.findElement(EXIT_BUTTON).click();
     }

@@ -29,13 +29,13 @@ public class LoginPage {
     }
 
     /// Шаги
-    @Step("Страница регистрации. Открытие страницы.")
+    @Step("**Страница регистрации**. Открытие страницы.")
     public LoginPage openLoginPage () {
         driver.get(LOGIN_PAGE_URL);
         return this;
     }
 
-    @Step("Страница регистрации. Скролл до ссылки \"Зарегистрироваться\".")
+    @Step("**Страница регистрации**. Скролл до ссылки \"Зарегистрироваться\".")
     public LoginPage scrollToRegisterLink () {
         Actions actions = new Actions(driver);
         actions.moveToElement(driver.findElement(REGISTER_LINK));
@@ -43,7 +43,7 @@ public class LoginPage {
         return this;
     }
 
-    @Step("Страница регистрации. Скролл до ссылки \"Восстановить пароль\".")
+    @Step("**Страница регистрации**. Скролл до ссылки \"Восстановить пароль\".")
     public LoginPage scrollToRestorePasswordLink () {
         Actions actions = new Actions(driver);
         actions.moveToElement(driver.findElement(RESTORE_PASSWORD_LINK));
@@ -51,34 +51,34 @@ public class LoginPage {
         return this;
     }
 
-    @Step("Страница регистрации. Клик по ссылке \"Зарегистрироваться\".")
+    @Step("**Страница регистрации**. Клик по ссылке \"Зарегистрироваться\".")
     public void clickRegisterLink () {
         driver.findElement(REGISTER_LINK).click();
     }
 
-    @Step("Страница регистрации. Ожидание видимости поля ввода почты.")
+    @Step("**Страница регистрации**. Ожидание видимости поля ввода почты.")
     public LoginPage waitForEmailFieldIsVisible () {
         new WebDriverWait(driver, Duration.ofSeconds(3))
                 .until(ExpectedConditions.visibilityOfElementLocated(EMAIL_FIELD));
         return this;
     }
 
-    @Step("Страница регистрации. Заполнение поля \"Email\".")
+    @Step("**Страница регистрации**. Заполнение поля \"Email\".")
     public LoginPage fillEmail (String email) {
         driver.findElement(EMAIL_FIELD).sendKeys(email);
         return this;
     }
-    @Step("Страница регистрации. Заполнение поля \"Пароль\".")
+    @Step("**Страница регистрации**. Заполнение поля \"Пароль\".")
     public LoginPage fillPassword (String password) {
         driver.findElement(PASSWORD_FIELD).sendKeys(password);
         return this;
     }
-    @Step("Страница регистрации. Клик по кнопке \"Войти\".")
+    @Step("**Страница регистрации**. Клик по кнопке \"Войти\".")
     public void clickEnterButton () {
         driver.findElement(ENTER_BUTTON).click();
     }
 
-    @Step("Страница регистрации. Заполнение всей формы входа и нажатие кнопки \"Войти\".")
+    @Step("**Страница регистрации**. Заполнение всей формы входа и нажатие кнопки \"Войти\".")
     public LoginPage fillLoginFormAndEnter (String email, String password) {
         fillEmail(email);
         fillPassword(password);

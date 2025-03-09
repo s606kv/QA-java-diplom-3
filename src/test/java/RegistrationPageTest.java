@@ -7,6 +7,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openqa.selenium.WebDriver;
 import net.datafaker.Faker;
+import utilities.WebDriverFactory;
 
 import static org.junit.Assert.assertTrue;
 
