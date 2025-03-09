@@ -43,30 +43,28 @@ public class PersonalCabinetTest {
     public void setUpAndLogin () {
         driver = WebDriverFactory.setBrowser(browser);
         driver.manage().window().maximize();
-        // логинимся в системе
         loginPage = new LoginPage(driver);
+        mainPage = new MainPage(driver);
+        profilePage = new ProfilePage(driver);
+        header = new Header(driver);
+        // логинимся в системе
         loginPage
                 .openLoginPage()
                 .waitForEmailFieldIsVisible()
                 .fillLoginFormAndEnter(email, password);
-    }
-
-    @Test
-    @DisplayName("Проверка перехода в личный кабинет через кнопку \"Личный кабинет\" в хэдере страницы.")
-    @Description("Проверяется возможность перехода в личный кабинет через кнопку \"Личный кабинет\" в хэдере страницы.")
-    public void personalCabinetButtonTest () {
-        mainPage = new MainPage(driver);
-        profilePage = new ProfilePage(driver);
-        header = new Header(driver);
-
-        // выполнение
+        // переходим в личный кабинет
         mainPage
                 .waitForBurgerConstructorIsVisible();
         header
                 .clickPersonalCabinetButton();
         profilePage
                 .waitForExitButtonIsVisible();
+    }
 
+    @Test
+    @DisplayName("Проверка перехода в личный кабинет через кнопку \"Личный кабинет\" в хэдере страницы.")
+    @Description("Проверяется возможность перехода в личный кабинет через кнопку \"Личный кабинет\" в хэдере страницы.")
+    public void personalCabinetButtonTest () {
         /// Проверка видимости кнопки "Выход" в личном профиле
         assertTrue(driver.findElement(ProfilePage.EXIT_BUTTON).isDisplayed());
 
@@ -75,6 +73,19 @@ public class PersonalCabinetTest {
                 .clickExitButton();
         loginPage
                 .waitForEmailFieldIsVisible();
+    }
+
+    @Test
+    @DisplayName("Проверка выхода из личного кабинета по кнопке \"Выход\".")
+    @Description("Проверяется выход из личного кабинета при нажатии кнопки \"Выход\".")
+    public void checkExitFromAccountByExitButton () {
+        // выход из профиля
+        profilePage
+                .clickExitButton();
+        loginPage
+                .waitForEmailFieldIsVisible();
+        /// Проверка видимости элемента после нажатия кнопки выхода
+        assertTrue(driver.findElement(LoginPage.EMAIL_FIELD).isDisplayed());
     }
 
 
