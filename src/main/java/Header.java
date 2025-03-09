@@ -3,6 +3,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class Header {
+    /// Конструктор
+    WebDriver driver;
+    public Header (WebDriver driver) {
+        this.driver=driver;
+    }
 
     /// Локаторы
     // кнопка "Конструктор"
@@ -11,12 +16,6 @@ public class Header {
     public static final By HEADER_LOGO = By.className("AppHeader_header__logo__2D0X2");
     // кнопка "Личный кабинет"
     private static final By HEADER_PERSONAL_CABINET_BUTTON = By.xpath(".//p[contains (text(), 'Личный Кабинет')]");
-
-    /// Конструктор
-    WebDriver driver;
-    public Header (WebDriver driver) {
-        this.driver=driver;
-    }
 
     /// Шаги
     @Step("**Хэдер сервиса**. Клик по кнопке \"Конструктор\".")

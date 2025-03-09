@@ -7,15 +7,15 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class ProfilePage {
-    ///  Локаторы
-    // кнопка "Выход"
-    public static final By EXIT_BUTTON = By.xpath(".//button[contains(@class, 'Account_button__14Yp3') and contains(text(), 'Выход')]");
-
     /// Конструктор
     WebDriver driver;
     public ProfilePage (WebDriver driver) {
         this.driver=driver;
     }
+
+    ///  Локаторы
+    // кнопка "Выход"
+    public static final By EXIT_BUTTON = By.xpath(".//button[contains(@class, 'Account_button__14Yp3') and contains(text(), 'Выход')]");
 
     /// Шаги
     @Step("**Страница профиля**. Ожидание появления кнопки \"Выход\".")

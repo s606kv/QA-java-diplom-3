@@ -9,6 +9,11 @@ import java.time.Duration;
 import static utilities.Links.MAIN_PAGE_URL;
 
 public class MainPage {
+    /// Конструктор
+    WebDriver driver;
+    public MainPage (WebDriver driver) {
+        this.driver=driver;
+    }
 
     ///  Локаторы
     // кнопка "Войти в аккаунт"
@@ -29,12 +34,6 @@ public class MainPage {
     public static final By FILLING_FIRST_ELEMENT = By.xpath(".//ul[@class='BurgerIngredients_ingredients__list__2A-mT'][3]/a[1]");
     // таймер ожидания
     public static final Duration TIMER_3_SEC = Duration.ofSeconds(3);
-
-    /// Конструктор
-    WebDriver driver;
-    public MainPage (WebDriver driver) {
-        this.driver=driver;
-    }
 
     /// Шаги
     @Step("**Главная страница**. Открытие страницы.")

@@ -124,6 +124,7 @@ public class LoginFromDifferentPlacesEnterButtonTest {
         // выполнение
         forgotPasswordPage
                 .openForgotPasswordPage()
+                .waitForEnterButtonIsVisible()
                 .clickEnterButton();
 
         loginAndGoToProfile(email, password);
@@ -140,6 +141,4 @@ public class LoginFromDifferentPlacesEnterButtonTest {
         // закрытие браузера
         driver.quit();
     }
-
-
 }

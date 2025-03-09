@@ -8,6 +8,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class RegistrationPage {
+    /// Конструктор
+    WebDriver driver;
+    public RegistrationPage(WebDriver driver) {
+        this.driver=driver;
+    }
 
     ///  Локаторы
     public static final String REGISTER_PAGE_URL = "https://stellarburgers.nomoreparties.site/register";
@@ -25,12 +30,6 @@ public class RegistrationPage {
     public static final By ENTER_BUTTON = By.xpath(".//a[contains(@class, 'Auth_link__1fOlj') and contains(text(), 'Войти')]");
     // предупреждение об ошибочном пароле
     public static final By INCORRECT_PASSWORD_MESSAGE = By.xpath(".//p[contains(@class, 'input__error') and contains(text(), 'Некорректный пароль')]");
-
-    /// Конструктор
-    WebDriver driver;
-    public RegistrationPage(WebDriver driver) {
-        this.driver=driver;
-    }
 
     /// Шаги
     @Step ("**Страница регистрации**. Открытие страницы.")
@@ -107,5 +106,4 @@ public class RegistrationPage {
     public void clickEnterButton () {
         driver.findElement(ENTER_BUTTON).click();
     }
-
 }

@@ -10,6 +10,12 @@ import java.time.Duration;
 import static utilities.Links.LOGIN_PAGE_URL;
 
 public class LoginPage {
+    /// Конструктор
+    WebDriver driver;
+    public LoginPage (WebDriver driver) {
+        this.driver=driver;
+    }
+
     ///  Локаторы
     // поле "Email"
     public static final By EMAIL_FIELD = By.xpath(".//form/fieldset[1]/div/div/input");
@@ -17,43 +23,12 @@ public class LoginPage {
     public static final By PASSWORD_FIELD = By.xpath(".//form/fieldset[2]/div/div/input");
     // кнопка входа
     public static final By ENTER_BUTTON = By.xpath(".//form/button[contains(text(), 'Войти')]");
-    // ссылка "Зарегистрироваться"
-    public static final By REGISTER_LINK = By.xpath(".//a[contains(@class, 'Auth_link__1fOlj') and contains (text(), 'Зарегистрироваться')]");
-    // ссылка "Восстановить пароль"
-    public static final By RESTORE_PASSWORD_LINK = By.xpath(".//a[contains(@class, 'Auth_link__1fOlj') and contains (text(), 'Восстановить пароль')]");
-
-    /// Конструктор
-    WebDriver driver;
-    public LoginPage (WebDriver driver) {
-        this.driver=driver;
-    }
 
     /// Шаги
     @Step("**Страница регистрации**. Открытие страницы.")
     public LoginPage openLoginPage () {
         driver.get(LOGIN_PAGE_URL);
         return this;
-    }
-
-    @Step("**Страница регистрации**. Скролл до ссылки \"Зарегистрироваться\".")
-    public LoginPage scrollToRegisterLink () {
-        Actions actions = new Actions(driver);
-        actions.moveToElement(driver.findElement(REGISTER_LINK));
-        actions.perform();
-        return this;
-    }
-
-    @Step("**Страница регистрации**. Скролл до ссылки \"Восстановить пароль\".")
-    public LoginPage scrollToRestorePasswordLink () {
-        Actions actions = new Actions(driver);
-        actions.moveToElement(driver.findElement(RESTORE_PASSWORD_LINK));
-        actions.perform();
-        return this;
-    }
-
-    @Step("**Страница регистрации**. Клик по ссылке \"Зарегистрироваться\".")
-    public void clickRegisterLink () {
-        driver.findElement(REGISTER_LINK).click();
     }
 
     @Step("**Страница регистрации**. Ожидание видимости поля ввода почты.")
@@ -85,7 +60,4 @@ public class LoginPage {
         clickEnterButton();
         return this;
     }
-
-
-
 }
