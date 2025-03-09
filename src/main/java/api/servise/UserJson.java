@@ -5,7 +5,7 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class UserJson {
     private String email;
     private String password;
     private String name;

@@ -1,22 +1,22 @@
 package api;
 
+import api.servise.UserJson;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
-import service.User;
 
+import static api.servise.Utilities.*;
 import static org.apache.http.HttpStatus.*;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertNotNull;
-import static service.Utilities.*;
 
 public class UserAPI {
 
     @Step ("POST. Получение ответа на запрос создания пользователя. Ручка api/auth/register.")
-    public Response userCreating (User user) {
+    public Response userCreating (UserJson userJson) {
         System.out.println("-> Создаётся пользователь.");
 
         Response response = REQUEST
-                .body(user)
+                .body(userJson)
                 .when()
                 .post(USER_CREATE);
 
@@ -76,11 +76,11 @@ public class UserAPI {
     }
 
     @Step ("POST. Получение ответа на запрос логина пользователя. Ручка api/auth/login.")
-    public Response loginUser (User user) {
+    public Response loginUser (UserJson userJson) {
         System.out.println("-> Выполняется вход пользователя в систему.");
 
         Response response = REQUEST
-                .body(user)
+                .body(userJson)
                 .when()
                 .post(USER_LOGIN);
 
@@ -117,7 +117,7 @@ public class UserAPI {
     }
 
     @Step ("GET. Получение ответа на запрос данных пользователя, проверка статуса и ответа. Ручка api/auth/user.")
-    public void getUserData (User user, String accessToken) {
+    public void getUserData (UserJson userJson, String accessToken) {
         System.out.println("-> Получение пользовательских данных.");
 
         Response response = REQUEST
@@ -135,18 +135,18 @@ public class UserAPI {
                 .assertThat()
                 .statusCode(SC_OK)
                 .body( "success", equalTo(true),
-                        "user.email", equalTo(user.getEmail()),
-                        "user.name", equalTo(user.getName())
+                        "user.email", equalTo(userJson.getEmail()),
+                        "user.name", equalTo(userJson.getName())
                 );
     }
 
     @Step ("PATCH. Получение ответа на запрос изменения данных пользователя. Ручка api/auth/user.")
-    public Response changeUserData (User user, String accessToken) {
+    public Response changeUserData (UserJson userJson, String accessToken) {
         System.out.println("-> Меняются данные пользователя.");
 
         Response response = REQUEST
                 .auth().oauth2(accessToken)
-                .body(user)
+                .body(userJson)
                 .when()
                 .patch(USER_DATA);
 

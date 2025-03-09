@@ -10,7 +10,6 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 import static utilities.Links.MAIN_PAGE_URL;
 
 public class Utilities {
-    public static final String BASE_URI = "https://stellarburgers.nomoreparties.site/";
     public static final RequestSpecification REQUEST = given().baseUri(MAIN_PAGE_URL).contentType(ContentType.JSON);
 
     public static final String USER_CREATE = "api/auth/register";
@@ -61,13 +60,13 @@ public class Utilities {
     }
 
     // сервисный метод проверки позитивного ответа с юзером
-    public static void checkUserPositiveResponse (Response response, User user, int statusCode, boolean successKeyValue) {
+    public static void checkUserPositiveResponse (Response response, UserJson userJson, int statusCode, boolean successKeyValue) {
         response.then()
                 .assertThat()
                 .statusCode(statusCode)
                 .body("success", equalTo(successKeyValue),
-                        "user.email", equalTo(user.getEmail()),
-                        "user.name", equalTo(user.getName()),
+                        "user.email", equalTo(userJson.getEmail()),
+                        "user.name", equalTo(userJson.getName()),
                         "accessToken", notNullValue(),
                         "refreshToken", notNullValue()
                 );
