@@ -6,10 +6,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
+import static utilities.Links.MAIN_PAGE_URL;
+
 public class MainPage {
 
     ///  Локаторы
-    public static final String MAIN_PAGE_URL = "https://stellarburgers.nomoreparties.site/";
     // кнопка "Войти в аккаунт"
     public static final By ENTER_TO_ACCOUNT_BUTTON = By.xpath(".//button[contains(text(), 'Войти в аккаунт')]");
     // кнопка "Оформить заказ"

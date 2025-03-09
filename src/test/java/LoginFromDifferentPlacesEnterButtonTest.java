@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openqa.selenium.WebDriver;
+import utilities.UserData;
 import utilities.WebDriverFactory;
 
 import static org.junit.Assert.assertTrue;
@@ -18,8 +19,8 @@ public class LoginFromDifferentPlacesEnterButtonTest {
     private MainPage mainPage;
     private Header header;
     private ProfilePage profilePage;
-    private String email = "ludgi@yandex.ru";
-    private String password = "123456";
+    private String email = UserData.TEST_EMAIL;
+    private String password = UserData.TEST_PASSWORD;
 
     // поля параметризации
     private final String browser;
@@ -43,6 +44,7 @@ public class LoginFromDifferentPlacesEnterButtonTest {
                 .waitForExitButtonIsVisible();
     }
 
+    // параметры
     @Parameterized.Parameters (name = "{1}")
     public static Object[][] setTestData () {
         return new Object[][] {
@@ -73,7 +75,7 @@ public class LoginFromDifferentPlacesEnterButtonTest {
 
         loginAndGoToProfile(email, password);
 
-        // проверка
+        /// Проверка видимости кнопки "Выход" в личном профиле
         assertTrue(driver.findElement(ProfilePage.EXIT_BUTTON).isDisplayed());
     }
 
@@ -90,7 +92,7 @@ public class LoginFromDifferentPlacesEnterButtonTest {
 
         loginAndGoToProfile(email, password);
 
-        // проверка
+        /// Проверка видимости кнопки "Выход" в личном профиле
         assertTrue(driver.findElement(ProfilePage.EXIT_BUTTON).isDisplayed());
     }
 
@@ -109,7 +111,7 @@ public class LoginFromDifferentPlacesEnterButtonTest {
 
         loginAndGoToProfile(email, password);
 
-        // проверка
+        /// Проверка видимости кнопки "Выход" в личном профиле
         assertTrue(driver.findElement(ProfilePage.EXIT_BUTTON).isDisplayed());
     }
 
@@ -126,7 +128,7 @@ public class LoginFromDifferentPlacesEnterButtonTest {
 
         loginAndGoToProfile(email, password);
 
-        // проверка
+        /// Проверка видимости кнопки "Выход" в личном профиле
         assertTrue(driver.findElement(ProfilePage.EXIT_BUTTON).isDisplayed());
     }
 

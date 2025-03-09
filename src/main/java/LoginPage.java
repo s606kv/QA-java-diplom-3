@@ -7,10 +7,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class LoginPage {
+import static utilities.Links.LOGIN_PAGE_URL;
 
+public class LoginPage {
     ///  Локаторы
-    public static final String LOGIN_PAGE_URL = "https://stellarburgers.nomoreparties.site/login";
     // поле "Email"
     public static final By EMAIL_FIELD = By.xpath(".//form/fieldset[1]/div/div/input");
     // поле "Пароль"

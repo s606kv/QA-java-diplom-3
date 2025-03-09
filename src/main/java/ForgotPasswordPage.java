@@ -6,10 +6,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class ForgotPasswordPage {
+import static utilities.Links.FORGOT_PASSWORD_PAGE_URL;
 
+public class ForgotPasswordPage {
     ///  Локаторы
-    public static final String FORGOT_PASSWORD_PAGE_URL = "https://stellarburgers.nomoreparties.site/forgot-password";
     // кнопка "Войти"
     public static final By ENTER_BUTTON = By.xpath(".//a[contains(@class, 'Auth_link__1fOlj') and contains(text(), 'Войти')]");
 

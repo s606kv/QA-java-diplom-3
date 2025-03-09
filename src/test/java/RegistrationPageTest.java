@@ -63,7 +63,7 @@ public class RegistrationPageTest {
                 .fillRegistrationForm(name, email, password)
                 .waitForEnterHeader();
 
-        // проверка
+        /// Проверка видимости кнопки "Вход" на странице входа в профиль
         assertTrue(driver.findElement(LoginPage.ENTER_BUTTON).isDisplayed());
     }
 
@@ -81,7 +81,7 @@ public class RegistrationPageTest {
                 .clickRegistrationButton()
                 .waitForIncorrectPasswordMessage();
 
-        // проверка отображения предупреждающего сообщения
+        /// Проверка отображения предупреждающего сообщения о некорректном пароле
         assertTrue(driver.findElement(RegistrationPage.INCORRECT_PASSWORD_MESSAGE).isDisplayed());
     }
 
