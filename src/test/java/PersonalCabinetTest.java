@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 import utilities.UserData;
 import utilities.WebDriverFactory;
 
+import static api.servise.Utilities.checkSuccessAssertTrue;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(Parameterized.class)
@@ -67,7 +68,7 @@ public class PersonalCabinetTest {
     @Description("Проверяется возможность перехода в личный кабинет через кнопку \"Личный кабинет\" в хэдере страницы.")
     public void personalCabinetButtonTest () {
         /// Проверка видимости кнопки "Выход" в личном профиле
-        assertTrue(driver.findElement(ProfilePage.EXIT_BUTTON).isDisplayed());
+        checkSuccessAssertTrue(driver.findElement(ProfilePage.EXIT_BUTTON).isDisplayed());
 
         // выход из профиля
         profilePage
@@ -86,7 +87,7 @@ public class PersonalCabinetTest {
         loginPage
                 .waitForEmailFieldIsVisible();
         /// Проверка видимости элемента после нажатия кнопки выхода
-        assertTrue(driver.findElement(LoginPage.EMAIL_FIELD).isDisplayed());
+        checkSuccessAssertTrue(driver.findElement(LoginPage.EMAIL_FIELD).isDisplayed());
     }
 
     @After

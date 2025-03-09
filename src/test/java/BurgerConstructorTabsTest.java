@@ -9,6 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import utilities.WebDriverFactory;
 
+import static api.servise.Utilities.checkSuccessAssertTrue;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(Parameterized.class)
@@ -77,7 +78,7 @@ public class BurgerConstructorTabsTest {
         }
 
         /// Проверка видимости первого элемента выбранного раздела
-        assertTrue(driver.findElement(firstElement).isDisplayed());
+        checkSuccessAssertTrue(driver.findElement(firstElement).isDisplayed());
     }
 
     @After

@@ -10,6 +10,7 @@ import org.openqa.selenium.WebDriver;
 import utilities.UserData;
 import utilities.WebDriverFactory;
 
+import static api.servise.Utilities.checkSuccessAssertTrue;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(Parameterized.class)
@@ -45,7 +46,7 @@ public class GoToBurgerConstructorFromPersonalCabinetByDifferentButtonsTest {
     }
 
     @Before
-    public void setUpAndLogin () {
+    public void setUp () {
         driver = WebDriverFactory.setBrowser(browser);
         driver.manage().window().maximize();
         // логинимся в системе
@@ -82,7 +83,7 @@ public class GoToBurgerConstructorFromPersonalCabinetByDifferentButtonsTest {
                 .waitForBurgerConstructorIsVisible();
 
         /// Проверка видимости конструктора бургера
-        assertTrue(driver.findElement(MainPage.BURGER_CONSTRUCTOR_SECTION).isDisplayed());
+        checkSuccessAssertTrue(driver.findElement(MainPage.BURGER_CONSTRUCTOR_SECTION).isDisplayed());
 
         // выход из профиля
         header

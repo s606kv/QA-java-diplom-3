@@ -9,7 +9,7 @@ import org.openqa.selenium.WebDriver;
 import net.datafaker.Faker;
 import utilities.WebDriverFactory;
 
-import static org.junit.Assert.assertTrue;
+import static api.servise.Utilities.checkSuccessAssertTrue;
 
 @RunWith(Parameterized.class)
 public class RegistrationPageTest {
@@ -21,23 +21,24 @@ public class RegistrationPageTest {
     // поля параметризации
     private final String browser;
     private final String testName;
+
     // конструктор
     public RegistrationPageTest(String browser, String testName) {
-        this.browser=browser;
-        this.testName=testName;
+        this.browser = browser;
+        this.testName = testName;
     }
 
     // параметры
-    @Parameterized.Parameters (name="{1}")
-    public static Object[][] setTestData () {
-        return new Object[][] {
+    @Parameterized.Parameters(name = "{1}")
+    public static Object[][] setTestData() {
+        return new Object[][]{
                 {WebDriverFactory.YANDEX, "Проверка в Яндекс Браузере"},
                 {WebDriverFactory.CHROME, "Проверка в Гугл Хроме"},
         };
     }
 
     @Before
-    public void setUp () {
+    public void setUp() {
         driver = WebDriverFactory.setBrowser(browser);
         driver.manage().window().maximize();
         registrationPage = new RegistrationPage(driver);
@@ -48,9 +49,6 @@ public class RegistrationPageTest {
     @DisplayName("Проверка возможности регистрации.")
     @Description("Проверяется регистрация пользователя при вводе валидных данных в поля формы регистрации.")
     public void successRegistrationTest() {
-        // объекты страницы логина
-        LoginPage loginPage = new LoginPage(driver);
-
         // задали данные пользователя с валидным паролем ГЗ 6 символов
         String name = faker.name().username();
         String email = faker.internet().emailAddress();
@@ -64,7 +62,7 @@ public class RegistrationPageTest {
                 .waitForEnterHeader();
 
         /// Проверка видимости кнопки "Вход" на странице входа в профиль
-        assertTrue(driver.findElement(LoginPage.ENTER_BUTTON).isDisplayed());
+        checkSuccessAssertTrue(driver.findElement(LoginPage.ENTER_BUTTON).isDisplayed());
     }
 
     @Test
@@ -82,7 +80,7 @@ public class RegistrationPageTest {
                 .waitForIncorrectPasswordMessage();
 
         /// Проверка отображения предупреждающего сообщения о некорректном пароле
-        assertTrue(driver.findElement(RegistrationPage.INCORRECT_PASSWORD_MESSAGE).isDisplayed());
+        checkSuccessAssertTrue(driver.findElement(RegistrationPage.INCORRECT_PASSWORD_MESSAGE).isDisplayed());
     }
 
     @After

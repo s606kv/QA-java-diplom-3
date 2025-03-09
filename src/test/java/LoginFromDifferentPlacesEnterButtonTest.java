@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 import utilities.UserData;
 import utilities.WebDriverFactory;
 
+import static api.servise.Utilities.checkSuccessAssertTrue;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(Parameterized.class)
@@ -76,7 +77,7 @@ public class LoginFromDifferentPlacesEnterButtonTest {
         loginAndGoToProfile(email, password);
 
         /// Проверка видимости кнопки "Выход" в личном профиле
-        assertTrue(driver.findElement(ProfilePage.EXIT_BUTTON).isDisplayed());
+        checkSuccessAssertTrue(driver.findElement(ProfilePage.EXIT_BUTTON).isDisplayed());
     }
 
     @Test
@@ -93,7 +94,7 @@ public class LoginFromDifferentPlacesEnterButtonTest {
         loginAndGoToProfile(email, password);
 
         /// Проверка видимости кнопки "Выход" в личном профиле
-        assertTrue(driver.findElement(ProfilePage.EXIT_BUTTON).isDisplayed());
+        checkSuccessAssertTrue(driver.findElement(ProfilePage.EXIT_BUTTON).isDisplayed());
     }
 
     @Test
@@ -112,7 +113,7 @@ public class LoginFromDifferentPlacesEnterButtonTest {
         loginAndGoToProfile(email, password);
 
         /// Проверка видимости кнопки "Выход" в личном профиле
-        assertTrue(driver.findElement(ProfilePage.EXIT_BUTTON).isDisplayed());
+        checkSuccessAssertTrue(driver.findElement(ProfilePage.EXIT_BUTTON).isDisplayed());
     }
 
     @Test
@@ -130,7 +131,7 @@ public class LoginFromDifferentPlacesEnterButtonTest {
         loginAndGoToProfile(email, password);
 
         /// Проверка видимости кнопки "Выход" в личном профиле
-        assertTrue(driver.findElement(ProfilePage.EXIT_BUTTON).isDisplayed());
+        checkSuccessAssertTrue(driver.findElement(ProfilePage.EXIT_BUTTON).isDisplayed());
     }
 
     @After

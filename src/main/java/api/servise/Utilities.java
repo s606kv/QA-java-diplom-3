@@ -7,6 +7,7 @@ import io.restassured.specification.RequestSpecification;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.junit.Assert.assertTrue;
 import static utilities.Links.MAIN_PAGE_URL;
 
 public class Utilities {
@@ -22,7 +23,7 @@ public class Utilities {
     public static final String GET_INGREDIENTS = "api/ingredients";
 
     // сервисный метод печати информации в зависимости от статус-кода
-    public static void printResponseInfo (Response response, int expectedStatusCode, String otherInfo) {
+    public static void printResponseInfo(Response response, int expectedStatusCode, String otherInfo) {
         // формируем тело ответа
         String responseBody = response
                 .then()
@@ -39,7 +40,7 @@ public class Utilities {
     }
 
     // сервисный метод извлечения данных пользователя из тела ответа
-    public static String extractUserData (Response response) {
+    public static String extractUserData(Response response) {
         // извлекаем емэйл
         String jsonEmail = response.then().extract().body().path("user.email");
         // извлекаем имя
@@ -60,7 +61,7 @@ public class Utilities {
     }
 
     // сервисный метод проверки позитивного ответа с юзером
-    public static void checkUserPositiveResponse (Response response, UserJson userJson, int statusCode, boolean successKeyValue) {
+    public static void checkUserPositiveResponse(Response response, UserJson userJson, int statusCode, boolean successKeyValue) {
         response.then()
                 .assertThat()
                 .statusCode(statusCode)
@@ -70,5 +71,15 @@ public class Utilities {
                         "accessToken", notNullValue(),
                         "refreshToken", notNullValue()
                 );
+    }
+
+    // сервисный метод печати сообщения об успешном assert-е
+    public static void checkSuccessAssertTrue(boolean condition) {
+        assertTrue(condition);
+        if (condition) {
+            System.out.println("✅ Проверка прошла успешно.");
+        } else {
+            throw new RuntimeException("⛔\uFE0F Проверка не прошла.");
+        }
     }
 }
