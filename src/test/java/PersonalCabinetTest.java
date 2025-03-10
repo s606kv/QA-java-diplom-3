@@ -1,6 +1,7 @@
 import api.UserAPI;
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
+import net.datafaker.Faker;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -46,9 +47,10 @@ public class PersonalCabinetTest {
     @Before
     public void setUpAndLogin () {
         /// Инициализация данных пользователя
-        email = UserData.TEST_USER_EMAIL;
-        password = UserData.TEST_USER_PASSWORD;
-        name = UserData.TEST_USER_NAME;
+        Faker faker = new Faker();
+        email = faker.internet().emailAddress();;
+        password = faker.lorem().characters(6, 6, false, false, true);;
+        name = faker.name().username();
         /// Создание нового пользователя и получение токена
         userAPI = new UserAPI();
         accessToken = userAPI.userCreateAngGetAccessToken(email, password, name);

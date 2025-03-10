@@ -1,13 +1,13 @@
 import api.UserAPI;
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
+import net.datafaker.Faker;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openqa.selenium.WebDriver;
-import utilities.UserData;
 import utilities.WebDriverFactory;
 
 import static api.servise.UtilitiesAPI.checkSuccessAssertTrue;
@@ -60,9 +60,10 @@ public class LoginFromDifferentPlacesEnterButtonTest {
     @Before
     public void setUp () {
         /// Инициализация данных пользователя
-        email = UserData.TEST_USER_EMAIL;
-        password = UserData.TEST_USER_PASSWORD;
-        name = UserData.TEST_USER_NAME;
+        Faker faker = new Faker();
+        email = faker.internet().emailAddress();;
+        password = faker.lorem().characters(6, 6, false, false, true);;
+        name = faker.name().username();
         /// Создание нового пользователя и получение токена
         userAPI = new UserAPI();
         accessToken = userAPI.userCreateAngGetAccessToken(email, password, name);
