@@ -1,3 +1,4 @@
+import api.UserAPI;
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
@@ -9,8 +10,7 @@ import org.openqa.selenium.WebDriver;
 import utilities.UserData;
 import utilities.WebDriverFactory;
 
-import static api.servise.Utilities.checkSuccessAssertTrue;
-import static org.junit.Assert.assertTrue;
+import static api.servise.UtilitiesAPI.checkSuccessAssertTrue;
 
 @RunWith(Parameterized.class)
 public class LoginFromDifferentPlacesEnterButtonTest {
@@ -20,8 +20,11 @@ public class LoginFromDifferentPlacesEnterButtonTest {
     private MainPage mainPage;
     private Header header;
     private ProfilePage profilePage;
-    private String email = UserData.TEST_EMAIL;
-    private String password = UserData.TEST_PASSWORD;
+    private String email;
+    private String password;
+    private String name;
+    private UserAPI userAPI;
+    private String accessToken;
 
     // поля параметризации
     private final String browser;
@@ -36,7 +39,7 @@ public class LoginFromDifferentPlacesEnterButtonTest {
     private void loginAndGoToProfile (String email, String password) {
         loginPage
                 .waitForEmailFieldIsVisible()
-                .fillLoginFormAndEnter(email, password);
+                .fillLoginFormAndPressRegisterButton(email, password);
         mainPage
                 .waitForBurgerConstructorIsVisible();
         header
@@ -56,8 +59,17 @@ public class LoginFromDifferentPlacesEnterButtonTest {
 
     @Before
     public void setUp () {
+        /// Инициализация данных пользователя
+        email = UserData.TEST_USER_EMAIL;
+        password = UserData.TEST_USER_PASSWORD;
+        name = UserData.TEST_USER_NAME;
+        /// Создание нового пользователя и получение токена
+        userAPI = new UserAPI();
+        accessToken = userAPI.userCreateAngGetAccessToken(email, password, name);
+        /// Настройка браузера
         driver = WebDriverFactory.setBrowser(browser);
         driver.manage().window().maximize();
+        /// Создание объектов страниц
         loginPage = new LoginPage(driver);
         mainPage = new MainPage(driver);
         header = new Header(driver);
@@ -141,5 +153,8 @@ public class LoginFromDifferentPlacesEnterButtonTest {
         loginPage.waitForEmailFieldIsVisible();
         // закрытие браузера
         driver.quit();
+        // удаление пользователя
+        userAPI.deleteUser(accessToken);
+        System.out.println("Тест завершен.");
     }
 }

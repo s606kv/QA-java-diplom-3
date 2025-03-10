@@ -9,8 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import utilities.WebDriverFactory;
 
-import static api.servise.Utilities.checkSuccessAssertTrue;
-import static org.junit.Assert.assertTrue;
+import static api.servise.UtilitiesAPI.checkSuccessAssertTrue;
 
 @RunWith(Parameterized.class)
 public class BurgerConstructorTabsTest {
@@ -84,6 +83,7 @@ public class BurgerConstructorTabsTest {
     @After
     public void tearDown () {
         driver.quit();
+        System.out.println("Тест завершен.");
     }
 
 }

@@ -1,7 +1,6 @@
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -54,7 +53,7 @@ public class LoginPage {
     }
 
     @Step("**Страница регистрации**. Заполнение всей формы входа и нажатие кнопки \"Войти\".")
-    public LoginPage fillLoginFormAndEnter (String email, String password) {
+    public LoginPage fillLoginFormAndPressRegisterButton (String email, String password) {
         fillEmail(email);
         fillPassword(password);
         clickEnterButton();

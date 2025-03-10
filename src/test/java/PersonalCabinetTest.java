@@ -1,3 +1,4 @@
+import api.UserAPI;
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
@@ -9,14 +10,16 @@ import org.openqa.selenium.WebDriver;
 import utilities.UserData;
 import utilities.WebDriverFactory;
 
-import static api.servise.Utilities.checkSuccessAssertTrue;
-import static org.junit.Assert.assertTrue;
+import static api.servise.UtilitiesAPI.checkSuccessAssertTrue;
 
 @RunWith(Parameterized.class)
 public class PersonalCabinetTest {
     private WebDriver driver;
-    private String email = UserData.TEST_EMAIL;
-    private String password = UserData.TEST_PASSWORD;
+    private String email;
+    private String password;
+    private String name;
+    private UserAPI userAPI;
+    private String accessToken;
     private MainPage mainPage;
     private Header header;
     private ProfilePage profilePage;
@@ -42,35 +45,44 @@ public class PersonalCabinetTest {
 
     @Before
     public void setUpAndLogin () {
-        // инициализация драйвера и объектов страниц
+        /// Инициализация данных пользователя
+        email = UserData.TEST_USER_EMAIL;
+        password = UserData.TEST_USER_PASSWORD;
+        name = UserData.TEST_USER_NAME;
+        /// Создание нового пользователя и получение токена
+        userAPI = new UserAPI();
+        accessToken = userAPI.userCreateAngGetAccessToken(email, password, name);
+        /// Настройка браузера
         driver = WebDriverFactory.setBrowser(browser);
         driver.manage().window().maximize();
+        /// Создание объектов страниц
         loginPage = new LoginPage(driver);
         mainPage = new MainPage(driver);
         profilePage = new ProfilePage(driver);
         header = new Header(driver);
-        // логинимся в системе
+        /// Логинимся в системе и проверяем, что оказались на главной странице
         loginPage
                 .openLoginPage()
                 .waitForEmailFieldIsVisible()
-                .fillLoginFormAndEnter(email, password);
-        // переходим в личный кабинет
+                .fillLoginFormAndPressRegisterButton(email, password);
         mainPage
                 .waitForBurgerConstructorIsVisible();
-        header
-                .clickPersonalCabinetButton();
-        profilePage
-                .waitForExitButtonIsVisible();
     }
 
     @Test
     @DisplayName("Проверка перехода в личный кабинет через кнопку \"Личный кабинет\" в хэдере страницы.")
     @Description("Проверяется возможность перехода в личный кабинет через кнопку \"Личный кабинет\" в хэдере страницы.")
-    public void personalCabinetButtonTest () {
+    public void personalCabinetHeaderButtonTest () {
+        // Переходим в личный кабинет через хэдер
+        header
+                .clickPersonalCabinetButton();
+        profilePage
+                .waitForExitButtonIsVisible();
+
         /// Проверка видимости кнопки "Выход" в личном профиле
         checkSuccessAssertTrue(driver.findElement(ProfilePage.EXIT_BUTTON).isDisplayed());
 
-        // выход из профиля
+        // Выход из профиля
         profilePage
                 .clickExitButton();
         loginPage
@@ -80,7 +92,12 @@ public class PersonalCabinetTest {
     @Test
     @DisplayName("Проверка выхода из личного кабинета по кнопке \"Выход\".")
     @Description("Проверяется выход из личного кабинета при нажатии кнопки \"Выход\".")
-    public void checkExitFromAccountByExitButton () {
+    public void checkExitFromPersonalAccountByExitButton () {
+        // Переходим в личный кабинет через хэдер
+        header
+                .clickPersonalCabinetButton();
+        profilePage
+                .waitForExitButtonIsVisible();
         // выход из профиля
         profilePage
                 .clickExitButton();
@@ -92,6 +109,10 @@ public class PersonalCabinetTest {
 
     @After
     public void tearDown () {
+        // закрытие браузера
         driver.quit();
+        // удаление пользователя
+        userAPI.deleteUser(accessToken);
+        System.out.println("Тест завершен.");
     }
 }

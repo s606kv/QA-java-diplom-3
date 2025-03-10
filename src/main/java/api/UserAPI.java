@@ -4,13 +4,12 @@ import api.servise.UserJson;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 
-import static api.servise.Utilities.*;
+import static api.servise.UtilitiesAPI.*;
 import static org.apache.http.HttpStatus.*;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertNotNull;
 
 public class UserAPI {
-
     @Step ("POST. Получение ответа на запрос создания пользователя. Ручка api/auth/register.")
     public Response userCreating (UserJson userJson) {
         System.out.println("-> Создаётся пользователь.");
@@ -51,28 +50,12 @@ public class UserAPI {
         return cleanAccessToken;
     }
 
-    @Step ("Извлечение refreshToken после создания пользователя.")
-    public String getRefreshToken (Response response) {
-        System.out.println("-> Получение refreshToken.");
-
-        String refreshToken = response
-                .then()
-                .extract()
-                .body()
-                .path("refreshToken")
-                .toString();
-
-        // вывод сообщения в зависимости от исхода запроса
-        if(!refreshToken.isEmpty()) {
-            System.out.println(String.format("\uD83D\uDFE2 refreshToken:%n%s%n", refreshToken));
-        } else {
-            System.out.println("\uD83D\uDFE1 ВНИМАНИЕ. refreshToken не получен.\n");
-        }
-
-        // проверка наличия refreshToken
-        assertNotNull(refreshToken);
-
-        return refreshToken;
+    @Step ("Создание пользователя и извлечение accessToken.")
+    public String userCreateAngGetAccessToken (String email, String password, String name) {
+        UserJson userJson = new UserJson (email, password, name);
+        Response userCreatingResponse = userCreating (userJson);
+        String accessToken = getAccessToken(userCreatingResponse);
+        return accessToken;
     }
 
     @Step ("POST. Получение ответа на запрос логина пользователя. Ручка api/auth/login.")
@@ -86,75 +69,6 @@ public class UserAPI {
 
         // печатаем информацию о запросе
         printResponseInfo(response, SC_OK, "");
-
-        return response;
-    }
-
-    @Step ("POST. Выход пользователя из системы с проверкой статус-кода и тела ответа. Ручка api/auth/logout.")
-    public Response logoutUser (String refreshToken) {
-        System.out.println("-> Выполняется выход пользователя из системы.");
-
-        // задаём боди
-        String body = String.format("{\"token\":\"%s\"}", refreshToken);
-
-        Response response = REQUEST
-                .body(body)
-                .when()
-                .post(USER_LOGOUT);
-
-        // печатаем информацию о запросе
-        printResponseInfo(response, SC_OK, "");
-
-        // проверка статуса и тела ответа
-        response.then()
-                .assertThat()
-                .statusCode(SC_OK)
-                .body( "success", equalTo(true),
-                        "message", equalTo("Successful logout")
-                );
-
-        return response;
-    }
-
-    @Step ("GET. Получение ответа на запрос данных пользователя, проверка статуса и ответа. Ручка api/auth/user.")
-    public void getUserData (UserJson userJson, String accessToken) {
-        System.out.println("-> Получение пользовательских данных.");
-
-        Response response = REQUEST
-                .auth().oauth2(accessToken)
-                .get(USER_DATA);
-
-        // извлекаем информацию из ответа
-        String otherInfo = extractUserData(response);
-
-        // печатаем информацию о запросе с данными пользователя
-        printResponseInfo(response, SC_OK, otherInfo);
-
-        // проверка статуса и тела ответа
-        response.then()
-                .assertThat()
-                .statusCode(SC_OK)
-                .body( "success", equalTo(true),
-                        "user.email", equalTo(userJson.getEmail()),
-                        "user.name", equalTo(userJson.getName())
-                );
-    }
-
-    @Step ("PATCH. Получение ответа на запрос изменения данных пользователя. Ручка api/auth/user.")
-    public Response changeUserData (UserJson userJson, String accessToken) {
-        System.out.println("-> Меняются данные пользователя.");
-
-        Response response = REQUEST
-                .auth().oauth2(accessToken)
-                .body(userJson)
-                .when()
-                .patch(USER_DATA);
-
-        // извлекаем информацию из ответа
-        String otherInfo = extractUserData(response);
-
-        // печатаем информацию о запросе с данными пользователя
-        printResponseInfo(response, SC_OK, otherInfo);
 
         return response;
     }
@@ -180,5 +94,4 @@ public class UserAPI {
                         "message", equalTo("User successfully removed")
                 );
     }
-
 }

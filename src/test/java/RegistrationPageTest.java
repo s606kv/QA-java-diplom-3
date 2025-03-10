@@ -1,5 +1,8 @@
+import api.UserAPI;
+import api.servise.UserJson;
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
+import io.restassured.response.Response;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,7 +12,7 @@ import org.openqa.selenium.WebDriver;
 import net.datafaker.Faker;
 import utilities.WebDriverFactory;
 
-import static api.servise.Utilities.checkSuccessAssertTrue;
+import static api.servise.UtilitiesAPI.checkSuccessAssertTrue;
 
 @RunWith(Parameterized.class)
 public class RegistrationPageTest {
@@ -21,7 +24,6 @@ public class RegistrationPageTest {
     // поля параметризации
     private final String browser;
     private final String testName;
-
     // конструктор
     public RegistrationPageTest(String browser, String testName) {
         this.browser = browser;
@@ -63,13 +65,32 @@ public class RegistrationPageTest {
 
         /// Проверка видимости кнопки "Вход" на странице входа в профиль
         checkSuccessAssertTrue(driver.findElement(LoginPage.ENTER_BUTTON).isDisplayed());
+
+        /// Закрывается браузер на этом этапе
+        driver.quit();
+
+        System.out.println("Запускается блок кода для удаления пользователя.");
+        // получаем токен через ручку логина для последующего удаления пользователя
+        UserAPI userAPI = new UserAPI();
+        UserJson userJson = new UserJson(email, password, name);
+        Response loginUserResponse = userAPI.loginUser(userJson);
+        String accessToken = loginUserResponse
+                .then()
+                .extract()
+                .body()
+                .path("accessToken")
+                .toString()
+                .substring(7);
+
+        // удаляем пользователя
+        userAPI.deleteUser(accessToken);
     }
 
     @Test
     @DisplayName("Проверка длины пароля.")
     @Description("Проверяется возможность ввода в поле регистрации пользователя пароля длиной меньше 6 символов.")
     public void incorrectPasswordTest() {
-        // задали невалидный пароль ГЗ 5 символов
+        // задали невалидный пароль, ГЗ 5 символов
         String password = faker.internet().password(5, 5);
 
         // заполнили только поле с паролем и кликнули на кнопку регистрации для снятия фокуса с поля
@@ -81,10 +102,13 @@ public class RegistrationPageTest {
 
         /// Проверка отображения предупреждающего сообщения о некорректном пароле
         checkSuccessAssertTrue(driver.findElement(RegistrationPage.INCORRECT_PASSWORD_MESSAGE).isDisplayed());
+
+        // закрывается браузер
+        driver.quit();
     }
 
     @After
-    public void closeBrowser () {
-        driver.quit();
+    public void printInfo () {
+        System.out.println("Тест завершен.");
     }
 }
