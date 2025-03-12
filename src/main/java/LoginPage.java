@@ -17,9 +17,9 @@ public class LoginPage {
 
     ///  Локаторы
     // поле "Email"
-    public static final By EMAIL_FIELD = By.xpath(".//form/fieldset[1]/div/div/input");
+    public static final By EMAIL_FIELD = By.xpath(".//label[contains(text(), 'Email')]/following-sibling::input");
     // поле "Пароль"
-    public static final By PASSWORD_FIELD = By.xpath(".//form/fieldset[2]/div/div/input");
+    public static final By PASSWORD_FIELD = By.xpath(".//label[contains(text(), 'Пароль')]/following-sibling::input");
     // кнопка входа
     public static final By ENTER_BUTTON = By.xpath(".//form/button[contains(text(), 'Войти')]");
 
