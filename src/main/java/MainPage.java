@@ -2,6 +2,7 @@ import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -42,18 +43,6 @@ public class MainPage {
     public By getBurgerConstructorSectionLocator () {
         return BURGER_CONSTRUCTOR_SECTION;
     }
-    @Step("**Главная страница**. Получение локатора заголовка списка булок.")
-    public By getBunListHeaderLocator () {
-        return BUN_LIST_HEADER;
-    }
-    @Step("**Главная страница**. Получение локатора заголовка списка соусов.")
-    public By getSauceListHeaderLocator () {
-        return SAUCE_LIST_HEADER;
-    }
-    @Step("**Главная страница**. Получение локатора заголовка списка начинок.")
-    public By getFillingListHeaderLocator () {
-        return FILLING_LIST_HEADER;
-    }
 
     /// Шаги
     @Step("**Главная страница**. Открытие страницы.")
@@ -79,38 +68,30 @@ public class MainPage {
         driver.findElement(BUN_TAB).click();
         return this;
     }
-
-    @Step("**Главная страница**. Ожидание видимости заголовка списка \"Булки\".")
-    public MainPage waitForBunListHeaderIsVisible() {
-        new WebDriverWait(driver, TIMER_3_SEC)
-                .until(ExpectedConditions.visibilityOfElementLocated(BUN_LIST_HEADER));
-        return this;
-    }
-
     @Step("**Главная страница**. Клик по кнопке переключения раздела \"Соусы\".")
     public MainPage clickSaucesTabSwitcher () {
         driver.findElement(SAUCE_TAB).click();
         return this;
     }
-
-    @Step("**Главная страница**. Ожидание видимости заголовка списка \"Соусы\".")
-    public MainPage waitForSauceListHeaderIsVisible() {
-        new WebDriverWait(driver, TIMER_3_SEC)
-                .until(ExpectedConditions.visibilityOfElementLocated(SAUCE_LIST_HEADER));
-        return this;
-    }
-
     @Step("**Главная страница**. Клик по кнопке переключения раздела \"Начинки\".")
     public MainPage clickFillingsTabSwitcher () {
         driver.findElement(FILLING_TAB).click();
         return this;
     }
 
-    @Step("**Главная страница**. Ожидание видимости заголовка списка \"Начинки\".")
-    public MainPage waitForFillingListHeaderIsVisible() {
-        new WebDriverWait(driver, TIMER_3_SEC)
-                .until(ExpectedConditions.visibilityOfElementLocated(FILLING_LIST_HEADER));
-        return this;
+    @Step("**Главная страница**. Получение веб-элемента с заголовком списка \"Булки\".")
+    public WebElement getBunListHeaderWebElement () {
+        WebElement bunListHeaderWebElement = driver.findElement(BUN_LIST_HEADER);
+        return bunListHeaderWebElement;
     }
-
+    @Step("**Главная страница**. Получение веб-элемента с заголовком списка \"Соусы\".")
+    public WebElement getSauceListHeaderWebElement () {
+        WebElement sauceListHeaderWebElement = driver.findElement(SAUCE_LIST_HEADER);
+        return sauceListHeaderWebElement;
+    }
+    @Step("**Главная страница**. Получение веб-элемента с заголовком списка \"Начинки\".")
+    public WebElement getFillingListHeaderWebElement () {
+        WebElement fillingListHeaderWebElement = driver.findElement(FILLING_LIST_HEADER);
+        return fillingListHeaderWebElement;
+    }
 }
