@@ -11,10 +11,10 @@ import utilities.WebDriverFactory;
 import static api.servise.UtilitiesAPI.checkSuccessAssertTrue;
 
 public class PersonalCabinetTest {
-    // инициализация драйвера
-    private String testBrowser = WebDriverFactory.getChrome();
-    private WebDriver driver = WebDriverFactory.setBrowser(testBrowser);
+    // выбор браузера
+    private String testBrowser = WebDriverFactory.getBrowserName();
 
+    private WebDriver driver;
     private String email;
     private String password;
     private String name;
@@ -35,7 +35,8 @@ public class PersonalCabinetTest {
         /// Создание нового пользователя и получение токена
         userAPI = new UserAPI();
         accessToken = userAPI.userCreateAngGetAccessToken(email, password, name);
-        /// Настройка браузера
+        // инициализация драйвера
+        driver = WebDriverFactory.setBrowser(testBrowser);
         driver.manage().window().maximize();
         /// Создание объектов страниц
         loginPage = new LoginPage(driver);

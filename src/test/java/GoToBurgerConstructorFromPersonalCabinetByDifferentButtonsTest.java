@@ -15,9 +15,10 @@ import static api.servise.UtilitiesAPI.checkSuccessAssertTrue;
 
 @RunWith(Parameterized.class)
 public class GoToBurgerConstructorFromPersonalCabinetByDifferentButtonsTest {
-    // инициализация драйвера
-    private String testBrowser = WebDriverFactory.getChrome();
-    private WebDriver driver = WebDriverFactory.setBrowser(testBrowser);
+    // выбор браузера
+    private String testBrowser = WebDriverFactory.getBrowserName();
+
+    private WebDriver driver;
     private UserAPI userAPI;
     private String email;
     private String password;
@@ -38,7 +39,7 @@ public class GoToBurgerConstructorFromPersonalCabinetByDifferentButtonsTest {
     }
 
     // параметры
-    @Parameterized.Parameters (name = "{2}")
+    @Parameterized.Parameters (name = "{1}")
     public static Object[][] setTestData () {
         return new Object[][] {
                 {Header.getHeaderConstructorButtonLocator(), "Проверка перехода через \"Конструктор\"."},
@@ -56,7 +57,8 @@ public class GoToBurgerConstructorFromPersonalCabinetByDifferentButtonsTest {
         /// Создание нового пользователя и получение токена
         userAPI = new UserAPI();
         accessToken = userAPI.userCreateAngGetAccessToken(email, password, name);
-        /// Настройка браузера
+        // инициализация драйвера
+        driver = WebDriverFactory.setBrowser(testBrowser);
         driver.manage().window().maximize();
     }
 

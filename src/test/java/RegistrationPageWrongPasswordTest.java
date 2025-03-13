@@ -11,11 +11,13 @@ import static api.servise.UtilitiesAPI.checkSuccessAssertTrue;
 
 public class RegistrationPageWrongPasswordTest {
     // выбор браузера
-    private String testBrowser = WebDriverFactory.getChrome();
+    private String testBrowser = WebDriverFactory.getBrowserName();
+
     private WebDriver driver;
 
     @Before
     public void setUp() {
+        // инициализация драйвера
         driver = WebDriverFactory.setBrowser(testBrowser);
         driver.manage().window().maximize();
     }

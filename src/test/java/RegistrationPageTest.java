@@ -14,10 +14,9 @@ import static api.servise.UtilitiesAPI.checkSuccessAssertTrue;
 
 public class RegistrationPageTest {
     // выбор браузера
-    private String testBrowser = WebDriverFactory.getChrome();
-    private WebDriver driver;
+    private String testBrowser = WebDriverFactory.getBrowserName();
 
-    // поля класса
+    private WebDriver driver;
     private RegistrationPage registrationPage;
     private String name;
     private String email;
@@ -25,6 +24,7 @@ public class RegistrationPageTest {
 
     @Before
     public void setUp() {
+        // инициализация драйвера
         driver = WebDriverFactory.setBrowser(testBrowser);
         driver.manage().window().maximize();
         // задали данные пользователя с валидным паролем ГЗ 6 символов
