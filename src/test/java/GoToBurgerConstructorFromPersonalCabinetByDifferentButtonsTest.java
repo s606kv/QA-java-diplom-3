@@ -61,19 +61,17 @@ public class GoToBurgerConstructorFromPersonalCabinetByDifferentButtonsTest {
         // инициализация драйвера
         driver = WebDriverFactory.setBrowser(testBrowser);
         driver.manage().window().maximize();
+        // создание объектов страниц
+        header = new Header(driver);
+        loginPage = new LoginPage(driver);
+        mainPage = new MainPage(driver);
+        profilePage = new ProfilePage(driver);
     }
 
     @Test
     @DisplayName("Переход из личного кабинета в конструктор через взаимодействие с разными элементами в хэдере.")
     @Description("Проверяется возможность перехода в конструктор бургера из личного кабинете через кнопку \"Конструктор\" и при нажатии на логотип в хэдере страницы.")
     public void goToConstructorFromPersonalCabinetByConstructorButtonTest () {
-        // создание объектов страниц
-        header = new Header(driver);
-        loginPage = new LoginPage(driver);
-        mainPage = new MainPage(driver);
-        profilePage = new ProfilePage(driver);
-
-        /// Выполнение
         // залогинились в системе
         loginPage
                 .openLoginPage()

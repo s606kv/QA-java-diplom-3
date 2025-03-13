@@ -48,7 +48,6 @@ public class RegistrationPageTest {
                 .fillRegistrationForm(name, email, password)
                 .waitForEnterHeader();
 
-
         /// Проверка видимости кнопки "Вход" на странице входа в профиль
         WebElement enterButtonWebElement = loginPage.getEnterButtonWebElement();
         boolean isEnterButtonIsDisplayed = enterButtonWebElement.isDisplayed();
@@ -59,7 +58,7 @@ public class RegistrationPageTest {
     public void printInfo () {
         // закрывается браузер
         driver.quit();
-        System.out.println("Запускается блок кода для удаления пользователя.");
+        System.out.println("Запускается блок кода для удаления пользователя.\n");
         // получаем токен через ручку логина для последующего удаления пользователя
         UserAPI userAPI = new UserAPI();
         UserJson userJson = new UserJson(email, password, name);
