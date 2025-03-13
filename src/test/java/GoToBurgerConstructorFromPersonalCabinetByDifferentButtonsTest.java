@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import utilities.WebDriverFactory;
 
 import static api.servise.UtilitiesAPI.checkSuccessAssertTrue;
@@ -98,7 +99,8 @@ public class GoToBurgerConstructorFromPersonalCabinetByDifferentButtonsTest {
                 .waitForBurgerConstructorIsVisible();
 
         /// Проверка видимости конструктора бургера
-        boolean isBurgerConstructorIsDisplayed = driver.findElement(mainPage.getBurgerConstructorSectionLocator()).isDisplayed();
+        WebElement burgerConstructorWebElement = mainPage.getBurgerConstructorWebElement();
+        boolean isBurgerConstructorIsDisplayed = burgerConstructorWebElement.isDisplayed();
         checkSuccessAssertTrue(isBurgerConstructorIsDisplayed);
     }
 

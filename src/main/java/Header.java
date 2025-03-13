@@ -32,15 +32,12 @@ public class Header {
     public void clickConstructorButton () {
         driver.findElement(HEADER_CONSTRUCTOR_BUTTON).click();
     }
-
     @Step("**Хэдер сервиса**. Клик по логотипу сервиса.")
     public void clickLogo () {
         driver.findElement(HEADER_LOGO).click();
     }
-
     @Step("**Хэдер сервиса**. Клик по кнопке \"Личный кабинет\".")
     public void clickPersonalCabinetButton () {
         driver.findElement(HEADER_PERSONAL_CABINET_BUTTON).click();
     }
-
 }

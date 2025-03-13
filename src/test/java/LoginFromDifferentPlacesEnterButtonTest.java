@@ -6,6 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import utilities.WebDriverFactory;
 
 import static api.servise.UtilitiesAPI.checkSuccessAssertTrue;
@@ -70,7 +71,8 @@ public class LoginFromDifferentPlacesEnterButtonTest {
         loginAndGoToProfile(email, password);
 
         /// Проверка видимости кнопки "Выход" в личном профиле
-        boolean exitButtonIsDisplayed = driver.findElement(profilePage.getExitButtonLocator()).isDisplayed();
+        WebElement exitButtonWebElement = profilePage.getExitButtonWebElement();
+        boolean exitButtonIsDisplayed = exitButtonWebElement.isDisplayed();
         checkSuccessAssertTrue(exitButtonIsDisplayed);
     }
 
@@ -88,7 +90,8 @@ public class LoginFromDifferentPlacesEnterButtonTest {
         loginAndGoToProfile(email, password);
 
         /// Проверка видимости кнопки "Выход" в личном профиле
-        boolean exitButtonIsDisplayed = driver.findElement(profilePage.getExitButtonLocator()).isDisplayed();
+        WebElement exitButtonWebElement = profilePage.getExitButtonWebElement();
+        boolean exitButtonIsDisplayed = exitButtonWebElement.isDisplayed();
         checkSuccessAssertTrue(exitButtonIsDisplayed);
     }
 
@@ -108,7 +111,8 @@ public class LoginFromDifferentPlacesEnterButtonTest {
         loginAndGoToProfile(email, password);
 
         /// Проверка видимости кнопки "Выход" в личном профиле
-        boolean exitButtonIsDisplayed = driver.findElement(profilePage.getExitButtonLocator()).isDisplayed();
+        WebElement exitButtonWebElement = profilePage.getExitButtonWebElement();
+        boolean exitButtonIsDisplayed = exitButtonWebElement.isDisplayed();
         checkSuccessAssertTrue(exitButtonIsDisplayed);
     }
 
@@ -127,7 +131,8 @@ public class LoginFromDifferentPlacesEnterButtonTest {
         loginAndGoToProfile(email, password);
 
         /// Проверка видимости кнопки "Выход" в личном профиле
-        boolean exitButtonIsDisplayed = driver.findElement(profilePage.getExitButtonLocator()).isDisplayed();
+        WebElement exitButtonWebElement = profilePage.getExitButtonWebElement();
+        boolean exitButtonIsDisplayed = exitButtonWebElement.isDisplayed();
         checkSuccessAssertTrue(exitButtonIsDisplayed);
     }
 

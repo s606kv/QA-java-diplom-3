@@ -1,6 +1,7 @@
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -31,26 +32,18 @@ public class RegistrationPage {
     // предупреждение об ошибочном пароле
     private static final By INCORRECT_PASSWORD_MESSAGE = By.xpath(".//p[contains(@class, 'input__error') and contains(text(), 'Некорректный пароль')]");
 
-    /// Геттеры
-    @Step("**Страница регистрации**. Получение локатора сообщения об ошибке в пароле.")
-    public By getIncorrectPasswordMessageLocator () {
-        return INCORRECT_PASSWORD_MESSAGE;
-    }
-
     /// Шаги
     @Step ("**Страница регистрации**. Открытие страницы.")
     public RegistrationPage openRegistrationPage () {
         driver.get(REGISTER_PAGE_URL);
         return this;
     }
-
     @Step ("**Страница регистрации**. Ожидание появления поля \"Имя\".")
     public RegistrationPage waitForNameFieldIsVisible () {
         new WebDriverWait(driver, Duration.ofSeconds(3))
                 .until(ExpectedConditions.visibilityOfElementLocated(NAME_FIELD));
         return this;
     }
-
     @Step ("**Страница регистрации**. Заполнение поля \"Имя\".")
     public RegistrationPage fillNameField (String name) {
         driver.findElement(NAME_FIELD).sendKeys(name);
@@ -87,29 +80,31 @@ public class RegistrationPage {
         clickRegistrationButton();
         return this;
     }
-
     @Step("**Страница регистрации**. Ожидание видимости сообщения о некорректном пароле.")
     public void waitForIncorrectPasswordMessage () {
         new WebDriverWait(driver, Duration.ofSeconds(3))
                 .until(ExpectedConditions.visibilityOfElementLocated(INCORRECT_PASSWORD_MESSAGE));
     }
-
     @Step("**Страница регистрации**. Ожидание видимости заголовка \"Вход\".")
     public RegistrationPage waitForEnterHeader () {
         new WebDriverWait(driver, Duration.ofSeconds(3))
                 .until(ExpectedConditions.visibilityOfElementLocated(ENTER_HEADER));
         return this;
     }
-
     @Step ("**Страница регистрации**. Скролл до кнопки \"Войти\".")
     public RegistrationPage scrollToEnterButton () {
         Actions actions = new Actions(driver);
         actions.moveToElement(driver.findElement(ENTER_BUTTON));
         return this;
     }
-
     @Step ("**Страница регистрации**. Клик по кнопке \"Войти\".")
     public void clickEnterButton () {
         driver.findElement(ENTER_BUTTON).click();
+    }
+
+    /// Веб-элементы
+    public WebElement getIncorrectPasswordMessageWebElement () {
+        WebElement incorrectPasswordMessageWebElement = driver.findElement(INCORRECT_PASSWORD_MESSAGE);
+        return incorrectPasswordMessageWebElement;
     }
 }

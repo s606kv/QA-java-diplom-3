@@ -1,6 +1,7 @@
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -23,30 +24,18 @@ public class LoginPage {
     // кнопка входа
     public static final By ENTER_BUTTON = By.xpath(".//form/button[contains(text(), 'Войти')]");
 
-    /// Геттеры
-    @Step("**Страница регистрации**. Получение локатора поля заполнения емэйла.")
-    public By getEmailFieldLocator () {
-        return EMAIL_FIELD;
-    }
-    @Step("**Страница регистрации**. Получение локатора кнопки входа.")
-    public By getEnterButtonLocator () {
-        return ENTER_BUTTON;
-    }
-
     /// Шаги
     @Step("**Страница регистрации**. Открытие страницы.")
     public LoginPage openLoginPage () {
         driver.get(LOGIN_PAGE_URL);
         return this;
     }
-
     @Step("**Страница регистрации**. Ожидание видимости поля ввода почты.")
     public LoginPage waitForEmailFieldIsVisible () {
         new WebDriverWait(driver, Duration.ofSeconds(3))
                 .until(ExpectedConditions.visibilityOfElementLocated(EMAIL_FIELD));
         return this;
     }
-
     @Step("**Страница регистрации**. Заполнение поля \"Email\".")
     public LoginPage fillEmail (String email) {
         driver.findElement(EMAIL_FIELD).sendKeys(email);
@@ -61,7 +50,6 @@ public class LoginPage {
     public void clickEnterButton () {
         driver.findElement(ENTER_BUTTON).click();
     }
-
     @Step("**Страница регистрации**. Заполнение всей формы входа и нажатие кнопки \"Войти\".")
     public LoginPage fillLoginFormAndPressRegisterButton (String email, String password) {
         fillEmail(email);
@@ -70,5 +58,15 @@ public class LoginPage {
         return this;
     }
 
-
+    /// Веб-элементы
+    @Step("**Страница регистрации**. Получение веб-элемента поля заполнения емэйла.")
+    public WebElement getEmailFieldWebElement () {
+        WebElement emailFieldWebElement = driver.findElement(EMAIL_FIELD);
+        return emailFieldWebElement;
+    }
+    @Step("**Страница регистрации**. Получение веб-элемента кнопки входа.")
+    public WebElement getEnterButtonWebElement () {
+        WebElement enterButtonWebElement = driver.findElement(ENTER_BUTTON);
+        return enterButtonWebElement;
+    }
 }

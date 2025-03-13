@@ -38,31 +38,22 @@ public class MainPage {
     // таймер ожидания
     private static final Duration TIMER_3_SEC = Duration.ofSeconds(3);
 
-    /// Геттеры для локаторов
-    @Step("**Главная страница**. Получение локатора конструктора бургеров.")
-    public By getBurgerConstructorSectionLocator () {
-        return BURGER_CONSTRUCTOR_SECTION;
-    }
-
     /// Шаги
     @Step("**Главная страница**. Открытие страницы.")
     public MainPage openMainPage () {
         driver.get(MAIN_PAGE_URL);
         return this;
     }
-
     @Step("**Главная страница**. Клик по кнопке \"Войти в аккаунт\".")
     public void clickEnterToAccountButton () {
         driver.findElement(ENTER_TO_ACCOUNT_BUTTON).click();
     }
-
     @Step("**Главная страница**. Ожидание появления секции с конструктором бургера.")
     public MainPage waitForBurgerConstructorIsVisible () {
         new WebDriverWait(driver, TIMER_3_SEC)
                 .until(ExpectedConditions.visibilityOfElementLocated(BURGER_CONSTRUCTOR_SECTION));
         return this;
     }
-
     @Step("**Главная страница**. Клик по кнопке переключения раздела \"Булки\".")
     public MainPage clickBunsTabSwitcher () {
         driver.findElement(BUN_TAB).click();
@@ -79,6 +70,7 @@ public class MainPage {
         return this;
     }
 
+    /// Веб-элементы
     @Step("**Главная страница**. Получение веб-элемента с заголовком списка \"Булки\".")
     public WebElement getBunListHeaderWebElement () {
         WebElement bunListHeaderWebElement = driver.findElement(BUN_LIST_HEADER);
@@ -93,5 +85,10 @@ public class MainPage {
     public WebElement getFillingListHeaderWebElement () {
         WebElement fillingListHeaderWebElement = driver.findElement(FILLING_LIST_HEADER);
         return fillingListHeaderWebElement;
+    }
+    @Step("**Главная страница**. Получение веб-элемента конструктора бургеров.")
+    public WebElement getBurgerConstructorWebElement () {
+        WebElement burgerConstructorWebElement = driver.findElement(BURGER_CONSTRUCTOR_SECTION);
+        return burgerConstructorWebElement;
     }
 }

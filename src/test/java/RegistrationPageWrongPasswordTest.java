@@ -5,6 +5,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import utilities.WebDriverFactory;
 
 import static api.servise.UtilitiesAPI.checkSuccessAssertTrue;
@@ -39,7 +40,8 @@ public class RegistrationPageWrongPasswordTest {
                 .waitForIncorrectPasswordMessage();
 
         /// Проверка отображения предупреждающего сообщения о некорректном пароле
-        boolean isIncorrectPasswordMessageLocatorIsDisplayed = driver.findElement(registrationPage.getIncorrectPasswordMessageLocator()).isDisplayed();
+        WebElement incorrectPasswordMessageWebElement = registrationPage.getIncorrectPasswordMessageWebElement();
+        boolean isIncorrectPasswordMessageLocatorIsDisplayed = incorrectPasswordMessageWebElement.isDisplayed();
         checkSuccessAssertTrue(isIncorrectPasswordMessageLocatorIsDisplayed);
     }
 

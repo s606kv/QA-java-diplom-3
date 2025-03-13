@@ -6,6 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import utilities.WebDriverFactory;
 
 import static api.servise.UtilitiesAPI.checkSuccessAssertTrue;
@@ -63,8 +64,9 @@ public class PersonalCabinetTest {
                 .waitForExitButtonIsVisible();
 
         /// Проверка видимости кнопки "Выход" в личном профиле
-        boolean isExitButtonIsDisplayed = driver.findElement(profilePage.getExitButtonLocator()).isDisplayed();
-        checkSuccessAssertTrue(isExitButtonIsDisplayed);
+        WebElement exitButtonWebElement = profilePage.getExitButtonWebElement();
+        boolean exitButtonIsDisplayed = exitButtonWebElement.isDisplayed();
+        checkSuccessAssertTrue(exitButtonIsDisplayed);
     }
 
     @Test
@@ -83,7 +85,8 @@ public class PersonalCabinetTest {
                 .waitForEmailFieldIsVisible();
 
         /// Проверка видимости элемента после нажатия кнопки выхода
-        boolean isEmailFieldIsDisplayed = driver.findElement(loginPage.getEmailFieldLocator()).isDisplayed();
+        WebElement emailFieldWebElement = loginPage.getEmailFieldWebElement();
+        boolean isEmailFieldIsDisplayed = emailFieldWebElement.isDisplayed();
         checkSuccessAssertTrue(isEmailFieldIsDisplayed);
     }
 

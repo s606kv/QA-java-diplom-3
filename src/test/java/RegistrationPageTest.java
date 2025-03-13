@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import net.datafaker.Faker;
+import org.openqa.selenium.WebElement;
 import utilities.WebDriverFactory;
 
 import static api.servise.UtilitiesAPI.checkSuccessAssertTrue;
@@ -49,7 +50,8 @@ public class RegistrationPageTest {
 
 
         /// Проверка видимости кнопки "Вход" на странице входа в профиль
-        boolean isEnterButtonIsDisplayed = driver.findElement(loginPage.getEnterButtonLocator()).isDisplayed();
+        WebElement enterButtonWebElement = loginPage.getEnterButtonWebElement();
+        boolean isEnterButtonIsDisplayed = enterButtonWebElement.isDisplayed();
         checkSuccessAssertTrue(isEnterButtonIsDisplayed);
     }
 
