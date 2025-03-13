@@ -67,11 +67,11 @@ public class LoginFromDifferentPlacesEnterButtonTest {
                 .openMainPage()
                 .waitForBurgerConstructorIsVisible()
                 .clickEnterToAccountButton();
-
         loginAndGoToProfile(email, password);
 
         /// Проверка видимости кнопки "Выход" в личном профиле
-        checkSuccessAssertTrue(driver.findElement(ProfilePage.getExitButtonLocator()).isDisplayed());
+        boolean exitButtonIsDisplayed = driver.findElement(profilePage.getExitButtonLocator()).isDisplayed();
+        checkSuccessAssertTrue(exitButtonIsDisplayed);
     }
 
     @Test
@@ -88,7 +88,8 @@ public class LoginFromDifferentPlacesEnterButtonTest {
         loginAndGoToProfile(email, password);
 
         /// Проверка видимости кнопки "Выход" в личном профиле
-        checkSuccessAssertTrue(driver.findElement(ProfilePage.getExitButtonLocator()).isDisplayed());
+        boolean exitButtonIsDisplayed = driver.findElement(profilePage.getExitButtonLocator()).isDisplayed();
+        checkSuccessAssertTrue(exitButtonIsDisplayed);
     }
 
     @Test
@@ -107,7 +108,8 @@ public class LoginFromDifferentPlacesEnterButtonTest {
         loginAndGoToProfile(email, password);
 
         /// Проверка видимости кнопки "Выход" в личном профиле
-        checkSuccessAssertTrue(driver.findElement(ProfilePage.getExitButtonLocator()).isDisplayed());
+        boolean exitButtonIsDisplayed = driver.findElement(profilePage.getExitButtonLocator()).isDisplayed();
+        checkSuccessAssertTrue(exitButtonIsDisplayed);
     }
 
     @Test
@@ -125,7 +127,8 @@ public class LoginFromDifferentPlacesEnterButtonTest {
         loginAndGoToProfile(email, password);
 
         /// Проверка видимости кнопки "Выход" в личном профиле
-        checkSuccessAssertTrue(driver.findElement(ProfilePage.getExitButtonLocator()).isDisplayed());
+        boolean exitButtonIsDisplayed = driver.findElement(profilePage.getExitButtonLocator()).isDisplayed();
+        checkSuccessAssertTrue(exitButtonIsDisplayed);
     }
 
     @After

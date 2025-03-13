@@ -18,7 +18,8 @@ public class ProfilePage {
     private static final By EXIT_BUTTON = By.xpath(".//button[contains(@class, 'Account_button__14Yp3') and contains(text(), 'Выход')]");
 
     /// Геттеры
-    public static By getExitButtonLocator () {
+    @Step("**Страница профиля**. Получение локатора кнопки выхода.")
+    public By getExitButtonLocator () {
         return EXIT_BUTTON;
     }
 

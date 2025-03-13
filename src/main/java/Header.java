@@ -18,14 +18,13 @@ public class Header {
     private static final By HEADER_PERSONAL_CABINET_BUTTON = By.xpath(".//p[contains (text(), 'Личный Кабинет')]");
 
     /// Геттеры
+    @Step("**Хэдер сервиса**. Получение локатора кнопки перехода в конструктор.")
     public static By getHeaderConstructorButtonLocator () {
         return HEADER_CONSTRUCTOR_BUTTON;
     }
+    @Step("**Хэдер сервиса**. Получение локатора логотипа в хэдере.")
     public static By getHeaderLogoLocator () {
         return HEADER_LOGO;
-    }
-    public static By getHeaderPersonalCabinetButtonLocator () {
-        return HEADER_PERSONAL_CABINET_BUTTON;
     }
 
     /// Шаги

@@ -40,14 +40,17 @@ public class RegistrationPageTest {
     public void successRegistrationTest() {
         // выполнение
         RegistrationPage registrationPage = new RegistrationPage(driver);
+        LoginPage loginPage = new LoginPage(driver);
         registrationPage
                 .openRegistrationPage()
                 .waitForNameFieldIsVisible()
                 .fillRegistrationForm(name, email, password)
                 .waitForEnterHeader();
 
+
         /// Проверка видимости кнопки "Вход" на странице входа в профиль
-        checkSuccessAssertTrue(driver.findElement(LoginPage.getEnterButtonLocator()).isDisplayed());
+        boolean isEnterButtonIsDisplayed = driver.findElement(loginPage.getEnterButtonLocator()).isDisplayed();
+        checkSuccessAssertTrue(isEnterButtonIsDisplayed);
     }
 
     @After

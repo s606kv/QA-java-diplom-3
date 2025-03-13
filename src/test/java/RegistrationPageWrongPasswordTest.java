@@ -39,7 +39,8 @@ public class RegistrationPageWrongPasswordTest {
                 .waitForIncorrectPasswordMessage();
 
         /// Проверка отображения предупреждающего сообщения о некорректном пароле
-        checkSuccessAssertTrue(driver.findElement(RegistrationPage.getIncorrectPasswordMessageLocator()).isDisplayed());
+        boolean isIncorrectPasswordMessageLocatorIsDisplayed = driver.findElement(registrationPage.getIncorrectPasswordMessageLocator()).isDisplayed();
+        checkSuccessAssertTrue(isIncorrectPasswordMessageLocatorIsDisplayed);
     }
 
     @After

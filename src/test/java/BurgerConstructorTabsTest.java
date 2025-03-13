@@ -35,7 +35,7 @@ public class BurgerConstructorTabsTest {
                     .waitForBunListHeaderIsVisible();
 
         /// Проверка видимости заголовка списка
-        boolean isBunListHeaderIsDisplayed = driver.findElement(MainPage.getBunListHeaderLocator()).isDisplayed();
+        boolean isBunListHeaderIsDisplayed = driver.findElement(mainPage.getBunListHeaderLocator()).isDisplayed();
         checkSuccessAssertTrue(isBunListHeaderIsDisplayed);
     }
 
@@ -48,7 +48,7 @@ public class BurgerConstructorTabsTest {
                 .waitForSauceListHeaderIsVisible();
 
         /// Проверка видимости заголовка списка
-        boolean isSauceListHeaderIsDisplayed = driver.findElement(MainPage.getSauceListHeaderLocator()).isDisplayed();
+        boolean isSauceListHeaderIsDisplayed = driver.findElement(mainPage.getSauceListHeaderLocator()).isDisplayed();
         checkSuccessAssertTrue(isSauceListHeaderIsDisplayed);
     }
 
@@ -61,7 +61,7 @@ public class BurgerConstructorTabsTest {
                 .waitForFillingListHeaderIsVisible();
 
         /// Проверка видимости заголовка списка
-        boolean isFillingListHeaderIsDisplayed = driver.findElement(MainPage.getFillingListHeaderLocator()).isDisplayed();
+        boolean isFillingListHeaderIsDisplayed = driver.findElement(mainPage.getFillingListHeaderLocator()).isDisplayed();
         checkSuccessAssertTrue(isFillingListHeaderIsDisplayed);
     }
 

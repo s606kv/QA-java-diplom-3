@@ -1,5 +1,4 @@
 import io.qameta.allure.Step;
-import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -25,13 +24,12 @@ public class LoginPage {
     public static final By ENTER_BUTTON = By.xpath(".//form/button[contains(text(), 'Войти')]");
 
     /// Геттеры
-    public static By getEmailFieldLocator () {
+    @Step("**Страница регистрации**. Получение локатора поля заполнения емэйла.")
+    public By getEmailFieldLocator () {
         return EMAIL_FIELD;
     }
-    public static By getPasswordFieldLocator () {
-        return PASSWORD_FIELD;
-    }
-    public static By getEnterButtonLocator () {
+    @Step("**Страница регистрации**. Получение локатора кнопки входа.")
+    public By getEnterButtonLocator () {
         return ENTER_BUTTON;
     }
 

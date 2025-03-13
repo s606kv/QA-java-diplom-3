@@ -38,8 +38,5 @@ public class ForgotPasswordPage {
         return this;
     }
 
-    /// Геттеры
-    public static By getEnterButtonLocator () {
-        return ENTER_BUTTON;
-    }
+
 }

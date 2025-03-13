@@ -16,18 +16,18 @@ import static api.servise.UtilitiesAPI.checkSuccessAssertTrue;
 @RunWith(Parameterized.class)
 public class GoToBurgerConstructorFromPersonalCabinetByDifferentButtonsTest {
     // выбор браузера
-    private String testBrowser = WebDriverFactory.getBrowserName();
+    private static String testBrowser = WebDriverFactory.getBrowserName();
 
     private WebDriver driver;
+    private Header header;
+    private LoginPage loginPage;
+    private MainPage mainPage;
+    private ProfilePage profilePage;
     private UserAPI userAPI;
     private String email;
     private String password;
     private String name;
     private String accessToken;
-    private LoginPage loginPage;
-    private MainPage mainPage;
-    private Header header;
-    private ProfilePage profilePage;
 
     // поля параметризации
     private final By locator;
@@ -67,9 +67,9 @@ public class GoToBurgerConstructorFromPersonalCabinetByDifferentButtonsTest {
     @Description("Проверяется возможность перехода в конструктор бургера из личного кабинете через кнопку \"Конструктор\" и при нажатии на логотип в хэдере страницы.")
     public void goToConstructorFromPersonalCabinetByConstructorButtonTest () {
         // создание объектов страниц
+        header = new Header(driver);
         loginPage = new LoginPage(driver);
         mainPage = new MainPage(driver);
-        header = new Header(driver);
         profilePage = new ProfilePage(driver);
 
         /// Выполнение
@@ -88,9 +88,9 @@ public class GoToBurgerConstructorFromPersonalCabinetByDifferentButtonsTest {
         profilePage
                 .waitForExitButtonIsVisible();
         // выбор кнопки взаимодействия
-        if (locator.equals(Header.getHeaderConstructorButtonLocator())) {
+        if (locator.equals(header.getHeaderConstructorButtonLocator())) {
             header.clickConstructorButton();
-        } else if (locator.equals(Header.getHeaderLogoLocator())) {
+        } else if (locator.equals(header.getHeaderLogoLocator())) {
             header.clickLogo();
         }
         // ожидание отображения главной страницы
@@ -98,7 +98,8 @@ public class GoToBurgerConstructorFromPersonalCabinetByDifferentButtonsTest {
                 .waitForBurgerConstructorIsVisible();
 
         /// Проверка видимости конструктора бургера
-        checkSuccessAssertTrue(driver.findElement(MainPage.BURGER_CONSTRUCTOR_SECTION).isDisplayed());
+        boolean isBurgerConstructorIsDisplayed = driver.findElement(mainPage.getBurgerConstructorSectionLocator()).isDisplayed();
+        checkSuccessAssertTrue(isBurgerConstructorIsDisplayed);
     }
 
     @After

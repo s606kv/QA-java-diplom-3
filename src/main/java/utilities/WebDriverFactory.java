@@ -10,10 +10,10 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class WebDriverFactory {
-    // установили браузер для тестов
     @Getter
     private static String browserName;
 
+    // браузер будет указываться в файле browser.txt и автоматически меняться в каждом тесте
     static {
         try {
             browserName = new String(Files.readAllBytes(Paths.get("src/main/resources/browser.txt")));
@@ -23,7 +23,6 @@ public class WebDriverFactory {
     }
 
     public static WebDriver setBrowser (String browserName) {
-        /// Блок условий
         if (browserName.equals("chrome")) {
             return new ChromeDriver();
         } else if (browserName.equals("yandex")) {

@@ -1,4 +1,5 @@
 import io.qameta.allure.Step;
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -15,43 +16,42 @@ public class MainPage {
         this.driver=driver;
     }
 
+
     ///  Локаторы
     // кнопка "Войти в аккаунт"
-    public static final By ENTER_TO_ACCOUNT_BUTTON = By.xpath(".//button[contains(text(), 'Войти в аккаунт')]");
+    private static final By ENTER_TO_ACCOUNT_BUTTON = By.xpath(".//button[contains(text(), 'Войти в аккаунт')]");
     // кнопка "Оформить заказ"
-    public static final By BURGER_CONSTRUCTOR_SECTION = By.className("BurgerIngredients_ingredients__1N8v2");
+    private static final By BURGER_CONSTRUCTOR_SECTION = By.className("BurgerIngredients_ingredients__1N8v2");
     // раздел "Булки" в конструкторе
-    public static final By BUN_TAB = By.xpath(".//section[@class='BurgerIngredients_ingredients__1N8v2']//span[contains(text(), 'Булки')]");
+    private static final By BUN_TAB = By.xpath(".//section[@class='BurgerIngredients_ingredients__1N8v2']//span[contains(text(), 'Булки')]");
     // первый элемент в "Булках"
-    public static final By BUN_LIST_HEADER = By.xpath(".//h2[contains(@class, 'text_type_main-medium') and contains (text(), 'Булки')]");
+    private static final By BUN_LIST_HEADER = By.xpath(".//h2[contains(@class, 'text_type_main-medium') and contains (text(), 'Булки')]");
     // раздел "Соус" в конструкторе
-    public static final By SAUCE_TAB = By.xpath(".//section[@class='BurgerIngredients_ingredients__1N8v2']//span[contains(text(), 'Соусы')]");
+    private static final By SAUCE_TAB = By.xpath(".//section[@class='BurgerIngredients_ingredients__1N8v2']//span[contains(text(), 'Соусы')]");
     // первый элемент в "Соусах"
-    public static final By SAUCE_LIST_HEADER = By.xpath(".//h2[contains(@class, 'text_type_main-medium') and contains (text(), 'Соусы')]");
+    private static final By SAUCE_LIST_HEADER = By.xpath(".//h2[contains(@class, 'text_type_main-medium') and contains (text(), 'Соусы')]");
     // раздел "Начинки" в конструкторе
-    public static final By FILLING_TAB = By.xpath(".//section[@class='BurgerIngredients_ingredients__1N8v2']//span[contains(text(), 'Начинки')]");
+    private static final By FILLING_TAB = By.xpath(".//section[@class='BurgerIngredients_ingredients__1N8v2']//span[contains(text(), 'Начинки')]");
     // первый элемент в "Начинках"
-    public static final By FILLING_LIST_HEADER = By.xpath(".//h2[contains(@class, 'text_type_main-medium') and contains (text(), 'Начинки')]");
+    private static final By FILLING_LIST_HEADER = By.xpath(".//h2[contains(@class, 'text_type_main-medium') and contains (text(), 'Начинки')]");
     // таймер ожидания
-    public static final Duration TIMER_3_SEC = Duration.ofSeconds(3);
+    private static final Duration TIMER_3_SEC = Duration.ofSeconds(3);
 
     /// Геттеры для локаторов
-    public static By getBunTabLocator () {
-        return BUN_TAB;
+    @Step("**Главная страница**. Получение локатора конструктора бургеров.")
+    public By getBurgerConstructorSectionLocator () {
+        return BURGER_CONSTRUCTOR_SECTION;
     }
-    public static By getBunListHeaderLocator () {
+    @Step("**Главная страница**. Получение локатора заголовка списка булок.")
+    public By getBunListHeaderLocator () {
         return BUN_LIST_HEADER;
     }
-    public static By getSauceTabLocator () {
-        return SAUCE_TAB;
-    }
-    public static By getSauceListHeaderLocator () {
+    @Step("**Главная страница**. Получение локатора заголовка списка соусов.")
+    public By getSauceListHeaderLocator () {
         return SAUCE_LIST_HEADER;
     }
-    public static By getFillingTabLocator () {
-        return FILLING_TAB;
-    }
-    public static By getFillingListHeaderLocator () {
+    @Step("**Главная страница**. Получение локатора заголовка списка начинок.")
+    public By getFillingListHeaderLocator () {
         return FILLING_LIST_HEADER;
     }
 

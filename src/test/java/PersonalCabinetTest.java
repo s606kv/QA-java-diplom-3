@@ -63,7 +63,8 @@ public class PersonalCabinetTest {
                 .waitForExitButtonIsVisible();
 
         /// Проверка видимости кнопки "Выход" в личном профиле
-        checkSuccessAssertTrue(driver.findElement(ProfilePage.getExitButtonLocator()).isDisplayed());
+        boolean isExitButtonIsDisplayed = driver.findElement(profilePage.getExitButtonLocator()).isDisplayed();
+        checkSuccessAssertTrue(isExitButtonIsDisplayed);
     }
 
     @Test
@@ -80,8 +81,10 @@ public class PersonalCabinetTest {
                 .clickExitButton();
         loginPage
                 .waitForEmailFieldIsVisible();
+
         /// Проверка видимости элемента после нажатия кнопки выхода
-        checkSuccessAssertTrue(driver.findElement(LoginPage.getEmailFieldLocator()).isDisplayed());
+        boolean isEmailFieldIsDisplayed = driver.findElement(loginPage.getEmailFieldLocator()).isDisplayed();
+        checkSuccessAssertTrue(isEmailFieldIsDisplayed);
     }
 
     @After

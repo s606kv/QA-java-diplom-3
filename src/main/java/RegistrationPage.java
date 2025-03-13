@@ -32,25 +32,8 @@ public class RegistrationPage {
     private static final By INCORRECT_PASSWORD_MESSAGE = By.xpath(".//p[contains(@class, 'input__error') and contains(text(), 'Некорректный пароль')]");
 
     /// Геттеры
-    public static By getNameFieldLocator () {
-        return NAME_FIELD;
-    }
-    public static By getEmailFieldLocator () {
-        return EMAIL_FIELD;
-    }
-    public static By getPasswordFieldLocator () {
-        return PASSWORD_FIELD;
-    }
-    public static By getRegistrationButtonLocator () {
-        return REGISTRATION_BUTTON;
-    }
-    public static By getEnterHeaderLocator () {
-        return ENTER_HEADER;
-    }
-    public static By getEnterButtonLocator () {
-        return ENTER_BUTTON;
-    }
-    public static By getIncorrectPasswordMessageLocator () {
+    @Step("**Страница регистрации**. Получение локатора сообщения об ошибке в пароле.")
+    public By getIncorrectPasswordMessageLocator () {
         return INCORRECT_PASSWORD_MESSAGE;
     }
 
