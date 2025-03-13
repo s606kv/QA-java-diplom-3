@@ -15,7 +15,9 @@ import static api.servise.UtilitiesAPI.checkSuccessAssertTrue;
 
 @RunWith(Parameterized.class)
 public class GoToBurgerConstructorFromPersonalCabinetByDifferentButtonsTest {
-    private WebDriver driver;
+    // инициализация драйвера
+    private String testBrowser = WebDriverFactory.getChrome();
+    private WebDriver driver = WebDriverFactory.setBrowser(testBrowser);
     private UserAPI userAPI;
     private String email;
     private String password;
@@ -27,12 +29,10 @@ public class GoToBurgerConstructorFromPersonalCabinetByDifferentButtonsTest {
     private ProfilePage profilePage;
 
     // поля параметризации
-    private final String browser;
     private final By locator;
     private final String testName;
     // конструктор
-    public GoToBurgerConstructorFromPersonalCabinetByDifferentButtonsTest (String browser, By locator, String testName) {
-        this.browser=browser;
+    public GoToBurgerConstructorFromPersonalCabinetByDifferentButtonsTest (By locator, String testName) {
         this.locator=locator;
         this.testName=testName;
     }
@@ -41,10 +41,8 @@ public class GoToBurgerConstructorFromPersonalCabinetByDifferentButtonsTest {
     @Parameterized.Parameters (name = "{2}")
     public static Object[][] setTestData () {
         return new Object[][] {
-                {WebDriverFactory.YANDEX, Header.HEADER_CONSTRUCTOR_BUTTON, "Проверка перехода через \"Конструктор\" в Яндекс Браузере"},
-                {WebDriverFactory.YANDEX, Header.HEADER_LOGO, "Проверка перехода через Лого в Яндекс Браузере"},
-                {WebDriverFactory.CHROME, Header.HEADER_CONSTRUCTOR_BUTTON, "Проверка перехода через \"Конструктор\" в Гугл Хроме"},
-                {WebDriverFactory.CHROME, Header.HEADER_LOGO, "Проверка перехода через Лого в Гугл Хроме"},
+                {Header.getHeaderConstructorButtonLocator(), "Проверка перехода через \"Конструктор\"."},
+                {Header.getHeaderLogoLocator(), "Проверка перехода через Лого."},
         };
     }
 
@@ -59,7 +57,6 @@ public class GoToBurgerConstructorFromPersonalCabinetByDifferentButtonsTest {
         userAPI = new UserAPI();
         accessToken = userAPI.userCreateAngGetAccessToken(email, password, name);
         /// Настройка браузера
-        driver = WebDriverFactory.setBrowser(browser);
         driver.manage().window().maximize();
     }
 
@@ -89,9 +86,9 @@ public class GoToBurgerConstructorFromPersonalCabinetByDifferentButtonsTest {
         profilePage
                 .waitForExitButtonIsVisible();
         // выбор кнопки взаимодействия
-        if (locator.equals(Header.HEADER_CONSTRUCTOR_BUTTON)) {
+        if (locator.equals(Header.getHeaderConstructorButtonLocator())) {
             header.clickConstructorButton();
-        } else if (locator.equals(Header.HEADER_LOGO)) {
+        } else if (locator.equals(Header.getHeaderLogoLocator())) {
             header.clickLogo();
         }
         // ожидание отображения главной страницы

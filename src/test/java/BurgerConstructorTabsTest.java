@@ -13,40 +13,35 @@ import static api.servise.UtilitiesAPI.checkSuccessAssertTrue;
 
 @RunWith(Parameterized.class)
 public class BurgerConstructorTabsTest {
-    // поля класса
-    private WebDriver driver;
+    // инициализация драйвера
+    private String testBrowser = WebDriverFactory.getChrome();
+    private WebDriver driver = WebDriverFactory.setBrowser(testBrowser);
+
     private MainPage mainPage;
 
     // поля параметризации
-    private final String browser;
     private final By tab;
-    private final By firstElement;
+    private final By firstHeader;
     private final String testName;
     // конструктор
-    public BurgerConstructorTabsTest(String browser, By tab, By firstElement, String testName) {
-        this.browser=browser;
+    public BurgerConstructorTabsTest(By tab, By firstHeader, String testName) {
         this.tab=tab;
-        this.firstElement=firstElement;
+        this.firstHeader=firstHeader;
         this.testName=testName;
     }
 
     // параметры
-    @Parameterized.Parameters (name = "{3}")
+    @Parameterized.Parameters (name = "{2}")
     public static Object[][] setTestData () {
         return new Object[][] {
-                {WebDriverFactory.YANDEX, MainPage.BUN_TAB, MainPage.BUN_FIRST_ELEMENT, "Проверка вкладки \"Булки\" в Яндекс Браузере"},
-                {WebDriverFactory.YANDEX, MainPage.SAUCE_TAB, MainPage.SAUCE_FIRST_ELEMENT, "Проверка вкладки \"Соусы\" в Яндекс Браузере"},
-                {WebDriverFactory.YANDEX, MainPage.FILLING_TAB, MainPage.FILLING_FIRST_ELEMENT, "Проверка вкладки \"Начинки\" в Яндекс Браузере"},
-                {WebDriverFactory.CHROME, MainPage.BUN_TAB, MainPage.BUN_FIRST_ELEMENT, "Проверка вкладки \"Булки\" в Яндекс Браузере"},
-                {WebDriverFactory.CHROME, MainPage.SAUCE_TAB, MainPage.SAUCE_FIRST_ELEMENT, "Проверка вкладки \"Соусы\" в Яндекс Браузере"},
-                {WebDriverFactory.CHROME, MainPage.FILLING_TAB, MainPage.FILLING_FIRST_ELEMENT, "Проверка вкладки \"Начинки\" в Яндекс Браузере"},
+                {MainPage.getBunTabLocator(), MainPage.getBunListHeaderLocator(), "Проверка вкладки \"Булки\"."},
+                {MainPage.getSauceTabLocator(), MainPage.getSauceListHeaderLocator(), "Проверка вкладки \"Соусы\"."},
+                {MainPage.getFillingTabLocator(), MainPage.getFillingListHeaderLocator(), "Проверка вкладки \"Начинки\"."},
         };
     }
 
-
     @Before
     public void setUp () {
-        driver = WebDriverFactory.setBrowser(browser);
         driver.manage().window().maximize();
         // открывается главная страница
         mainPage = new MainPage(driver);
@@ -60,24 +55,23 @@ public class BurgerConstructorTabsTest {
     @Description("Проверяется активация разделов \"Булки\", \"Соусы\", \"Начинки\" и отображение первого элемента каждого раздела.")
     public void tabTest () {
         /// Определяются условия
-        if (tab.equals(MainPage.BUN_TAB)) {
+        if (tab.equals(MainPage.getBunTabLocator())) {
             mainPage
-                    .clickBunsTabSwitcher()
-                    .waitForFirstBunIsVisible();
+                    .waitForBunListHeaderIsVisible();
         }
-        else if (tab.equals(MainPage.SAUCE_TAB)) {
+        else if (tab.equals(MainPage.getSauceTabLocator())) {
             mainPage
                     .clickSaucesTabSwitcher()
-                    .waitForFirstSauceIsVisible();
+                    .waitForSauceListHeaderIsVisible();
         }
-        else if (tab.equals(MainPage.FILLING_TAB)) {
+        else if (tab.equals(MainPage.getFillingTabLocator())) {
             mainPage
                     .clickFillingsTabSwitcher()
-                    .waitForFirstFillingIsVisible();
+                    .waitForFillingListHeaderIsVisible();
         }
 
         /// Проверка видимости первого элемента выбранного раздела
-        checkSuccessAssertTrue(driver.findElement(firstElement).isDisplayed());
+        checkSuccessAssertTrue(driver.findElement(firstHeader).isDisplayed());
     }
 
     @After

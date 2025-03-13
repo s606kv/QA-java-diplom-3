@@ -6,8 +6,15 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 public class WebDriverFactory {
 
-    public static final String CHROME = "Chrome";
-    public static final String YANDEX = "Yandex";
+    private static final String CHROME = "Chrome";
+    public static String getChrome () {
+        return CHROME;
+    }
+
+    private static final String YANDEX = "Yandex";
+    public static String getYandex () {
+        return YANDEX;
+    }
 
     public static WebDriver setBrowser (String browserName) {
         /// Настройка Я.Браузера

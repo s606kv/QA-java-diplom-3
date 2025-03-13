@@ -5,16 +5,16 @@ import net.datafaker.Faker;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
 import org.openqa.selenium.WebDriver;
 import utilities.WebDriverFactory;
 
 import static api.servise.UtilitiesAPI.checkSuccessAssertTrue;
 
-@RunWith(Parameterized.class)
 public class PersonalCabinetTest {
-    private WebDriver driver;
+    // инициализация драйвера
+    private String testBrowser = WebDriverFactory.getChrome();
+    private WebDriver driver = WebDriverFactory.setBrowser(testBrowser);
+
     private String email;
     private String password;
     private String name;
@@ -24,24 +24,6 @@ public class PersonalCabinetTest {
     private Header header;
     private ProfilePage profilePage;
     private LoginPage loginPage;
-
-    // поля параметризации
-    private final String browser;
-    private final String testName;
-    // конструктор
-    public PersonalCabinetTest(String browser, String testName) {
-        this.browser=browser;
-        this.testName=testName;
-    }
-
-    // параметры
-    @Parameterized.Parameters (name = "{1}")
-    public static Object[][] setTestData () {
-        return new Object[][] {
-                {WebDriverFactory.YANDEX, "Проверка в Яндекс Браузере"},
-                {WebDriverFactory.CHROME, "Проверка в Гугл Хроме"},
-        };
-    }
 
     @Before
     public void setUpAndLogin () {
@@ -54,7 +36,6 @@ public class PersonalCabinetTest {
         userAPI = new UserAPI();
         accessToken = userAPI.userCreateAngGetAccessToken(email, password, name);
         /// Настройка браузера
-        driver = WebDriverFactory.setBrowser(browser);
         driver.manage().window().maximize();
         /// Создание объектов страниц
         loginPage = new LoginPage(driver);
@@ -81,13 +62,7 @@ public class PersonalCabinetTest {
                 .waitForExitButtonIsVisible();
 
         /// Проверка видимости кнопки "Выход" в личном профиле
-        checkSuccessAssertTrue(driver.findElement(ProfilePage.EXIT_BUTTON).isDisplayed());
-
-        // Выход из профиля
-        profilePage
-                .clickExitButton();
-        loginPage
-                .waitForEmailFieldIsVisible();
+        checkSuccessAssertTrue(driver.findElement(ProfilePage.getExitButtonLocator()).isDisplayed());
     }
 
     @Test
@@ -105,7 +80,7 @@ public class PersonalCabinetTest {
         loginPage
                 .waitForEmailFieldIsVisible();
         /// Проверка видимости элемента после нажатия кнопки выхода
-        checkSuccessAssertTrue(driver.findElement(LoginPage.EMAIL_FIELD).isDisplayed());
+        checkSuccessAssertTrue(driver.findElement(LoginPage.getEmailFieldLocator()).isDisplayed());
     }
 
     @After

@@ -15,21 +15,44 @@ public class RegistrationPage {
     }
 
     ///  Локаторы
-    public static final String REGISTER_PAGE_URL = "https://stellarburgers.nomoreparties.site/register";
+    private static final String REGISTER_PAGE_URL = "https://stellarburgers.nomoreparties.site/register";
     // поле "Имя"
-    public static final By NAME_FIELD = By.xpath(".//form/fieldset//label[(text()='Имя')]/following-sibling::input");
+    private static final By NAME_FIELD = By.xpath(".//form/fieldset//label[(text()='Имя')]/following-sibling::input");
     // поле "Email"
-    public static final By EMAIL_FIELD = By.xpath(".//form/fieldset//label[(text()='Email')]/following-sibling::input");
+    private static final By EMAIL_FIELD = By.xpath(".//form/fieldset//label[(text()='Email')]/following-sibling::input");
     // поле "Пароль"
-    public static final By PASSWORD_FIELD = By.xpath(".//form/fieldset//label[(text()='Пароль')]/following-sibling::input");
+    private static final By PASSWORD_FIELD = By.xpath(".//form/fieldset//label[(text()='Пароль')]/following-sibling::input");
     // кнопка "Зарегистрироваться"
-    public static final By REGISTRATION_BUTTON = By.xpath(".//form/button[contains(@class, 'button_button__33qZ0') and contains(text(), 'Зарегистрироваться')]");
+    private static final By REGISTRATION_BUTTON = By.xpath(".//form/button[contains(@class, 'button_button__33qZ0') and contains(text(), 'Зарегистрироваться')]");
     // заголовок "Войти"
-    public static final By ENTER_HEADER = By.xpath(".//div[@class='Auth_login__3hAey']/h2[(text()='Вход')]");
+    private static final By ENTER_HEADER = By.xpath(".//div[@class='Auth_login__3hAey']/h2[(text()='Вход')]");
     // кнопка "Войти"
-    public static final By ENTER_BUTTON = By.xpath(".//a[contains(@class, 'Auth_link__1fOlj') and contains(text(), 'Войти')]");
+    private static final By ENTER_BUTTON = By.xpath(".//a[contains(@class, 'Auth_link__1fOlj') and contains(text(), 'Войти')]");
     // предупреждение об ошибочном пароле
-    public static final By INCORRECT_PASSWORD_MESSAGE = By.xpath(".//p[contains(@class, 'input__error') and contains(text(), 'Некорректный пароль')]");
+    private static final By INCORRECT_PASSWORD_MESSAGE = By.xpath(".//p[contains(@class, 'input__error') and contains(text(), 'Некорректный пароль')]");
+
+    /// Геттеры
+    public static By getNameFieldLocator () {
+        return NAME_FIELD;
+    }
+    public static By getEmailFieldLocator () {
+        return EMAIL_FIELD;
+    }
+    public static By getPasswordFieldLocator () {
+        return PASSWORD_FIELD;
+    }
+    public static By getRegistrationButtonLocator () {
+        return REGISTRATION_BUTTON;
+    }
+    public static By getEnterHeaderLocator () {
+        return ENTER_HEADER;
+    }
+    public static By getEnterButtonLocator () {
+        return ENTER_BUTTON;
+    }
+    public static By getIncorrectPasswordMessageLocator () {
+        return INCORRECT_PASSWORD_MESSAGE;
+    }
 
     /// Шаги
     @Step ("**Страница регистрации**. Открытие страницы.")

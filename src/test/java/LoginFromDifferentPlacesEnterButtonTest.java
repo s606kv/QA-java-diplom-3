@@ -5,17 +5,16 @@ import net.datafaker.Faker;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
 import org.openqa.selenium.WebDriver;
 import utilities.WebDriverFactory;
 
 import static api.servise.UtilitiesAPI.checkSuccessAssertTrue;
 
-@RunWith(Parameterized.class)
 public class LoginFromDifferentPlacesEnterButtonTest {
-    // поля класса
-    private WebDriver driver;
+    // инициализация драйвера
+    private String testBrowser = WebDriverFactory.getChrome();
+    private WebDriver driver = WebDriverFactory.setBrowser(testBrowser);
+
     private LoginPage loginPage;
     private MainPage mainPage;
     private Header header;
@@ -25,15 +24,6 @@ public class LoginFromDifferentPlacesEnterButtonTest {
     private String name;
     private UserAPI userAPI;
     private String accessToken;
-
-    // поля параметризации
-    private final String browser;
-    private final String testName;
-    // конструктор
-    public LoginFromDifferentPlacesEnterButtonTest(String browser, String testName) {
-        this.browser=browser;
-        this.testName=testName;
-    }
 
     // метода входа в систему и перехода в личный профиль
     private void loginAndGoToProfile (String email, String password) {
@@ -48,15 +38,6 @@ public class LoginFromDifferentPlacesEnterButtonTest {
                 .waitForExitButtonIsVisible();
     }
 
-    // параметры
-    @Parameterized.Parameters (name = "{1}")
-    public static Object[][] setTestData () {
-        return new Object[][] {
-                {WebDriverFactory.YANDEX, "Проверка в Яндекс Браузере"},
-                {WebDriverFactory.CHROME, "Проверка в Гугл Хроме"},
-        };
-    }
-
     @Before
     public void setUp () {
         /// Инициализация данных пользователя
@@ -68,7 +49,6 @@ public class LoginFromDifferentPlacesEnterButtonTest {
         userAPI = new UserAPI();
         accessToken = userAPI.userCreateAngGetAccessToken(email, password, name);
         /// Настройка браузера
-        driver = WebDriverFactory.setBrowser(browser);
         driver.manage().window().maximize();
         /// Создание объектов страниц
         loginPage = new LoginPage(driver);
@@ -90,7 +70,7 @@ public class LoginFromDifferentPlacesEnterButtonTest {
         loginAndGoToProfile(email, password);
 
         /// Проверка видимости кнопки "Выход" в личном профиле
-        checkSuccessAssertTrue(driver.findElement(ProfilePage.EXIT_BUTTON).isDisplayed());
+        checkSuccessAssertTrue(driver.findElement(ProfilePage.getExitButtonLocator()).isDisplayed());
     }
 
     @Test
@@ -107,7 +87,7 @@ public class LoginFromDifferentPlacesEnterButtonTest {
         loginAndGoToProfile(email, password);
 
         /// Проверка видимости кнопки "Выход" в личном профиле
-        checkSuccessAssertTrue(driver.findElement(ProfilePage.EXIT_BUTTON).isDisplayed());
+        checkSuccessAssertTrue(driver.findElement(ProfilePage.getExitButtonLocator()).isDisplayed());
     }
 
     @Test
@@ -126,7 +106,7 @@ public class LoginFromDifferentPlacesEnterButtonTest {
         loginAndGoToProfile(email, password);
 
         /// Проверка видимости кнопки "Выход" в личном профиле
-        checkSuccessAssertTrue(driver.findElement(ProfilePage.EXIT_BUTTON).isDisplayed());
+        checkSuccessAssertTrue(driver.findElement(ProfilePage.getExitButtonLocator()).isDisplayed());
     }
 
     @Test
@@ -144,7 +124,7 @@ public class LoginFromDifferentPlacesEnterButtonTest {
         loginAndGoToProfile(email, password);
 
         /// Проверка видимости кнопки "Выход" в личном профиле
-        checkSuccessAssertTrue(driver.findElement(ProfilePage.EXIT_BUTTON).isDisplayed());
+        checkSuccessAssertTrue(driver.findElement(ProfilePage.getExitButtonLocator()).isDisplayed());
     }
 
     @After

@@ -10,14 +10,14 @@ import static utilities.Links.FORGOT_PASSWORD_PAGE_URL;
 
 public class ForgotPasswordPage {
     /// Конструктор
-    WebDriver driver;
+    private WebDriver driver;
     public ForgotPasswordPage (WebDriver driver) {
         this.driver=driver;
     }
 
     ///  Локаторы
     // кнопка "Войти"
-    public static final By ENTER_BUTTON = By.xpath(".//a[contains(@class, 'Auth_link__1fOlj') and contains(text(), 'Войти')]");
+    private static final By ENTER_BUTTON = By.xpath(".//a[contains(@class, 'Auth_link__1fOlj') and contains(text(), 'Войти')]");
 
     /// Шаги
     @Step("**Страница восстановления пароля**. Открытие страницы.")
@@ -36,5 +36,10 @@ public class ForgotPasswordPage {
         new WebDriverWait(driver, Duration.ofSeconds(3))
                 .until(ExpectedConditions.visibilityOfElementLocated(ENTER_BUTTON));
         return this;
+    }
+
+    /// Геттеры
+    public static By getEnterButtonLocator () {
+        return ENTER_BUTTON;
     }
 }

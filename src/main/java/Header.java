@@ -4,18 +4,29 @@ import org.openqa.selenium.WebDriver;
 
 public class Header {
     /// Конструктор
-    WebDriver driver;
+    private WebDriver driver;
     public Header (WebDriver driver) {
         this.driver=driver;
     }
 
     /// Локаторы
     // кнопка "Конструктор"
-    public static final By HEADER_CONSTRUCTOR_BUTTON = By.xpath(".//p[contains (text(), 'Конструктор')]");
+    private static final By HEADER_CONSTRUCTOR_BUTTON = By.xpath(".//p[contains (text(), 'Конструктор')]");
     // кнопка с логотипом
-    public static final By HEADER_LOGO = By.className("AppHeader_header__logo__2D0X2");
+    private static final By HEADER_LOGO = By.className("AppHeader_header__logo__2D0X2");
     // кнопка "Личный кабинет"
     private static final By HEADER_PERSONAL_CABINET_BUTTON = By.xpath(".//p[contains (text(), 'Личный Кабинет')]");
+
+    /// Геттеры
+    public static By getHeaderConstructorButtonLocator () {
+        return HEADER_CONSTRUCTOR_BUTTON;
+    }
+    public static By getHeaderLogoLocator () {
+        return HEADER_LOGO;
+    }
+    public static By getHeaderPersonalCabinetButtonLocator () {
+        return HEADER_PERSONAL_CABINET_BUTTON;
+    }
 
     /// Шаги
     @Step("**Хэдер сервиса**. Клик по кнопке \"Конструктор\".")

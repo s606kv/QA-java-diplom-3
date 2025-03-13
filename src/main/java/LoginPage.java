@@ -1,4 +1,5 @@
 import io.qameta.allure.Step;
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -22,6 +23,17 @@ public class LoginPage {
     public static final By PASSWORD_FIELD = By.xpath(".//label[contains(text(), 'Пароль')]/following-sibling::input");
     // кнопка входа
     public static final By ENTER_BUTTON = By.xpath(".//form/button[contains(text(), 'Войти')]");
+
+    /// Геттеры
+    public static By getEmailFieldLocator () {
+        return EMAIL_FIELD;
+    }
+    public static By getPasswordFieldLocator () {
+        return PASSWORD_FIELD;
+    }
+    public static By getEnterButtonLocator () {
+        return ENTER_BUTTON;
+    }
 
     /// Шаги
     @Step("**Страница регистрации**. Открытие страницы.")
@@ -59,4 +71,6 @@ public class LoginPage {
         clickEnterButton();
         return this;
     }
+
+
 }

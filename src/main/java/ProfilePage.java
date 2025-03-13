@@ -15,7 +15,12 @@ public class ProfilePage {
 
     ///  Локаторы
     // кнопка "Выход"
-    public static final By EXIT_BUTTON = By.xpath(".//button[contains(@class, 'Account_button__14Yp3') and contains(text(), 'Выход')]");
+    private static final By EXIT_BUTTON = By.xpath(".//button[contains(@class, 'Account_button__14Yp3') and contains(text(), 'Выход')]");
+
+    /// Геттеры
+    public static By getExitButtonLocator () {
+        return EXIT_BUTTON;
+    }
 
     /// Шаги
     @Step("**Страница профиля**. Ожидание появления кнопки \"Выход\".")

@@ -23,17 +23,37 @@ public class MainPage {
     // раздел "Булки" в конструкторе
     public static final By BUN_TAB = By.xpath(".//section[@class='BurgerIngredients_ingredients__1N8v2']//span[contains(text(), 'Булки')]");
     // первый элемент в "Булках"
-    public static final By BUN_FIRST_ELEMENT = By.xpath(".//ul[@class='BurgerIngredients_ingredients__list__2A-mT'][1]/a[1]");
+    public static final By BUN_LIST_HEADER = By.xpath(".//h2[contains(@class, 'text_type_main-medium') and contains (text(), 'Булки')]");
     // раздел "Соус" в конструкторе
     public static final By SAUCE_TAB = By.xpath(".//section[@class='BurgerIngredients_ingredients__1N8v2']//span[contains(text(), 'Соусы')]");
     // первый элемент в "Соусах"
-    public static final By SAUCE_FIRST_ELEMENT = By.xpath(".//ul[@class='BurgerIngredients_ingredients__list__2A-mT'][2]/a[1]");
+    public static final By SAUCE_LIST_HEADER = By.xpath(".//h2[contains(@class, 'text_type_main-medium') and contains (text(), 'Соусы')]");
     // раздел "Начинки" в конструкторе
     public static final By FILLING_TAB = By.xpath(".//section[@class='BurgerIngredients_ingredients__1N8v2']//span[contains(text(), 'Начинки')]");
     // первый элемент в "Начинках"
-    public static final By FILLING_FIRST_ELEMENT = By.xpath(".//ul[@class='BurgerIngredients_ingredients__list__2A-mT'][3]/a[1]");
+    public static final By FILLING_LIST_HEADER = By.xpath(".//h2[contains(@class, 'text_type_main-medium') and contains (text(), 'Начинки')]");
     // таймер ожидания
     public static final Duration TIMER_3_SEC = Duration.ofSeconds(3);
+
+    /// Геттеры для локаторов
+    public static By getBunTabLocator () {
+        return BUN_TAB;
+    }
+    public static By getBunListHeaderLocator () {
+        return BUN_LIST_HEADER;
+    }
+    public static By getSauceTabLocator () {
+        return SAUCE_TAB;
+    }
+    public static By getSauceListHeaderLocator () {
+        return SAUCE_LIST_HEADER;
+    }
+    public static By getFillingTabLocator () {
+        return FILLING_TAB;
+    }
+    public static By getFillingListHeaderLocator () {
+        return FILLING_LIST_HEADER;
+    }
 
     /// Шаги
     @Step("**Главная страница**. Открытие страницы.")
@@ -56,40 +76,40 @@ public class MainPage {
 
     @Step("**Главная страница**. Клик по кнопке переключения раздела \"Булки\".")
     public MainPage clickBunsTabSwitcher () {
-        driver.findElement(BUN_TAB);
+        driver.findElement(BUN_TAB).click();
         return this;
     }
 
-    @Step("**Главная страница**. Ожидание видимости первого элемента секции \"Булки\".")
-    public MainPage waitForFirstBunIsVisible () {
+    @Step("**Главная страница**. Ожидание видимости заголовка списка \"Булки\".")
+    public MainPage waitForBunListHeaderIsVisible() {
         new WebDriverWait(driver, TIMER_3_SEC)
-                .until(ExpectedConditions.visibilityOfElementLocated(BUN_FIRST_ELEMENT));
+                .until(ExpectedConditions.visibilityOfElementLocated(BUN_LIST_HEADER));
         return this;
     }
 
     @Step("**Главная страница**. Клик по кнопке переключения раздела \"Соусы\".")
     public MainPage clickSaucesTabSwitcher () {
-        driver.findElement(SAUCE_TAB);
+        driver.findElement(SAUCE_TAB).click();
         return this;
     }
 
-    @Step("**Главная страница**. Ожидание видимости первого элемента секции \"Соусы\".")
-    public MainPage waitForFirstSauceIsVisible () {
+    @Step("**Главная страница**. Ожидание видимости заголовка списка \"Соусы\".")
+    public MainPage waitForSauceListHeaderIsVisible() {
         new WebDriverWait(driver, TIMER_3_SEC)
-                .until(ExpectedConditions.visibilityOfElementLocated(SAUCE_FIRST_ELEMENT));
+                .until(ExpectedConditions.visibilityOfElementLocated(SAUCE_LIST_HEADER));
         return this;
     }
 
     @Step("**Главная страница**. Клик по кнопке переключения раздела \"Начинки\".")
     public MainPage clickFillingsTabSwitcher () {
-        driver.findElement(FILLING_TAB);
+        driver.findElement(FILLING_TAB).click();
         return this;
     }
 
-    @Step("**Главная страница**. Ожидание видимости первого элемента секции \"Начинки\".")
-    public MainPage waitForFirstFillingIsVisible () {
+    @Step("**Главная страница**. Ожидание видимости заголовка списка \"Начинки\".")
+    public MainPage waitForFillingListHeaderIsVisible() {
         new WebDriverWait(driver, TIMER_3_SEC)
-                .until(ExpectedConditions.visibilityOfElementLocated(FILLING_FIRST_ELEMENT));
+                .until(ExpectedConditions.visibilityOfElementLocated(FILLING_LIST_HEADER));
         return this;
     }
 
