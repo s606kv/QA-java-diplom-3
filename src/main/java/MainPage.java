@@ -1,5 +1,4 @@
 import io.qameta.allure.Step;
-import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,24 +16,17 @@ public class MainPage {
         this.driver=driver;
     }
 
-
     ///  Локаторы
     // кнопка "Войти в аккаунт"
     private static final By ENTER_TO_ACCOUNT_BUTTON = By.xpath(".//button[contains(text(), 'Войти в аккаунт')]");
     // кнопка "Оформить заказ"
     private static final By BURGER_CONSTRUCTOR_SECTION = By.className("BurgerIngredients_ingredients__1N8v2");
     // раздел "Булки" в конструкторе
-    private static final By BUN_TAB = By.xpath(".//section[@class='BurgerIngredients_ingredients__1N8v2']//span[contains(text(), 'Булки')]");
-    // первый элемент в "Булках"
-    private static final By BUN_LIST_HEADER = By.xpath(".//h2[contains(@class, 'text_type_main-medium') and contains (text(), 'Булки')]");
+    private static final By BUN_TAB = By.xpath(".//span[contains(@class, 'text_type_main-default') and contains(text(), 'Булки')]/parent::div");
     // раздел "Соус" в конструкторе
-    private static final By SAUCE_TAB = By.xpath(".//section[@class='BurgerIngredients_ingredients__1N8v2']//span[contains(text(), 'Соусы')]");
-    // первый элемент в "Соусах"
-    private static final By SAUCE_LIST_HEADER = By.xpath(".//h2[contains(@class, 'text_type_main-medium') and contains (text(), 'Соусы')]");
+    private static final By SAUCE_TAB = By.xpath(".//span[contains(@class, 'text_type_main-default') and contains(text(), 'Соусы')]/parent::div");
     // раздел "Начинки" в конструкторе
-    private static final By FILLING_TAB = By.xpath(".//section[@class='BurgerIngredients_ingredients__1N8v2']//span[contains(text(), 'Начинки')]");
-    // первый элемент в "Начинках"
-    private static final By FILLING_LIST_HEADER = By.xpath(".//h2[contains(@class, 'text_type_main-medium') and contains (text(), 'Начинки')]");
+    private static final By FILLING_TAB = By.xpath(".//span[contains(@class, 'text_type_main-default') and contains(text(), 'Начинки')]/parent::div");
     // таймер ожидания
     private static final Duration TIMER_3_SEC = Duration.ofSeconds(3);
 
@@ -69,26 +61,31 @@ public class MainPage {
         driver.findElement(FILLING_TAB).click();
         return this;
     }
+    @Step("**Главная страница**. Ожидание смены имени класса у атрибута class элемента div.")
+    public void waitAttributeClassNameIsChanged (WebElement element, String attribute, String className) {
+        new WebDriverWait(driver, TIMER_3_SEC)
+                .until(ExpectedConditions.attributeToBe(element, attribute, className));
+    }
 
     /// Веб-элементы
-    @Step("**Главная страница**. Получение веб-элемента с заголовком списка \"Булки\".")
-    public WebElement getBunListHeaderWebElement () {
-        WebElement bunListHeaderWebElement = driver.findElement(BUN_LIST_HEADER);
-        return bunListHeaderWebElement;
-    }
-    @Step("**Главная страница**. Получение веб-элемента с заголовком списка \"Соусы\".")
-    public WebElement getSauceListHeaderWebElement () {
-        WebElement sauceListHeaderWebElement = driver.findElement(SAUCE_LIST_HEADER);
-        return sauceListHeaderWebElement;
-    }
-    @Step("**Главная страница**. Получение веб-элемента с заголовком списка \"Начинки\".")
-    public WebElement getFillingListHeaderWebElement () {
-        WebElement fillingListHeaderWebElement = driver.findElement(FILLING_LIST_HEADER);
-        return fillingListHeaderWebElement;
-    }
     @Step("**Главная страница**. Получение веб-элемента конструктора бургеров.")
     public WebElement getBurgerConstructorWebElement () {
         WebElement burgerConstructorWebElement = driver.findElement(BURGER_CONSTRUCTOR_SECTION);
         return burgerConstructorWebElement;
+    }
+    @Step("**Главная страница**. Получение веб-элемента переключателя вкладки булок.")
+    public WebElement getBunTabWebElement () {
+        WebElement bunTabWebElement = driver.findElement(BUN_TAB);
+        return bunTabWebElement;
+    }
+    @Step("**Главная страница**. Получение веб-элемента переключателя вкладки соусов.")
+    public WebElement getSauseTabWebElement () {
+        WebElement sauseTabWebElement = driver.findElement(SAUCE_TAB);
+        return sauseTabWebElement;
+    }
+    @Step("**Главная страница**. Получение веб-элемента переключателя вкладки начинок.")
+    public WebElement getFillingTabWebElement () {
+        WebElement fillingTabWebElement = driver.findElement(FILLING_TAB);
+        return fillingTabWebElement;
     }
 }

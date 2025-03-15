@@ -90,6 +90,15 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- SoftAssertions - проверка нескольких assertion в рамках одного теста -->
+        <!-- https://mvnrepository.com/artifact/org.assertj/assertj-core -->
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>3.27.3</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
